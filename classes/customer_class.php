@@ -1,69 +1,66 @@
 <?php
-require("../settings/db_class.php");
 
-class customer_class extends db_connection
-{
-    public   $customer_id = null;
-    public  $customer_name = null;
+require('../Settings/connection.php');
 
-// method to create a customer
-// select all customers
-// update a customer
-// get one customer
-// delete a customer
-
-    public function create_customer($a,$b,$c,$d,$e,$f,$g){
-
-    $sql = "INSERT INTO customer(`customer_name`,`customer_email`,`customer_pass`,`customer_country`,`customer_city`,`customer_contact`,`user_role`) VALUES('$a','$b','$c','$d','$e','$f','$g')";
-    return $this->db_query($sql);
-
-}
-
-public function all_customers(){
-    $sql = "SELECT * FROM customer";
-    return $this->db_query($sql);
-
-}
+// inherit the methods from Connection
+class Customer extends Connection{
 
 
-public function update_customer($a,$b,$c,$d,$e,$id){
-    $sql = "UPDATE customer
-					SET `customer_name`='$a',
-						`customer_email`='$b',
-						`customer_country`='$c',
-						`customer_city`='$d',
-						`customer_contact`='$e'
-					
-					WHERE customer_id='$id'";
-    //run the sql execution
-    return $this->db_query($sql);
-}
+    function addCustomer($name, $email, $pass, $country, $city, $contact){
 
-public function change_role($id,$role){
-        $sql = " UPDATE customer SET `user_role`='$role' WHERE `customer_id`= '$id'";
-}
+        $query = "insert into customer(customer_name, customer_email, customer_pass, customer_country, customer_city, customer_contact, user_role ) 
+		values('$name', '$email', '$pass', '$country', '$city', '$contact', 2)";
+		
+		// return true or false
+		return $this->query($query);
 
-public function getCustomerById($id){
-    $sql = " SELECT * FROM customer WHERE customer_id = '$id'";
+	}
 
-    return $this->db_query($sql);
-}
 
-public function updatePassword($id,$pass){
-        $sql = " UPDATE customer 
-        SET `customer_pass`='$pass'
- WHERE customer_id = '$id'";
+	function deleteCustomer($id){
 
-        return $this->db_query($sql);
-    }
+		$query = "delete from customer where customer_id = '$id'";
 
-    public function delete_customer($id){
-        $sql = "DELETE FROM customer WHERE customer_id = '$id'";
-        return $this->db_query($sql);
-    }
+		// return true or false
+		return $this->query($query);
+
+	}
+
+
+	function updateCustomer($name, $email, $pass, $country, $city, $contact, $id){
+
+        $query = "update customer 
+        set customer_name = '$name', customer_email = '$email', customer_pass = '$pass', 
+        customer_country = '$country', customer_city = '$city', customer_contact = '$contact'
+        where customer_id = '$id'";
+
+		// return true or false
+        return $this->query($query);
+        
+
+	}
+
+	function checkEmail($email){
+		$query = "select * from customer
+		where customer_email = '$email'";
+
+		$this->query($query);
+		return $this->fetch();
+	}
+
+	function login($email, $pass){
+		$query = "select * customer
+		where customer_email = '$email' and customer_pass = '$pass'";
+		
+		$this->query($query);
+
+		return $this->fetch();
+
+	}
 
 
 
+}	
 
-}
 
+?>

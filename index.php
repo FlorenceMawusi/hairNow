@@ -80,7 +80,37 @@
                 >Home
                 <span class="sr-only">(current)</span>
               </a>
+            </li>
 
+
+            <!-- Dropdown -->
+            <?php
+            //if(!empty($_SESSION['user_role']) && $_SESSION['user_role'] == 1){
+            echo
+            "
+            <li class='nav-item dropdown'>
+              <a
+                class='nav-link dropdown-toggle'
+                id='navbarDropdownMenuLink'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                aria-expanded='false'
+                ><i class='fab fa-product-hunt'></i>Manage Product</a
+              >
+              <div
+                class='dropdown-menu dropdown-primary'
+                aria-labelledby='navbarDropdownMenuLink'
+              > 
+                <a class='dropdown-item' href='Admin/add_category.php'>Add Category</a>
+              
+                <a class='dropdown-item' href='Admin/add_brand.php'>Add brand</a>
+                <a class='dropdown-item' href='Admin/add_product.php'>Add Product</a>
+           
+              </div>
+            </li>
+            ";
+           //}
+            ?>
      
           </ul>
 
@@ -107,9 +137,21 @@
               <div
                 class="dropdown-menu dropdown-primary"
                 aria-labelledby="navbarDropdownMenuLink"
-              >
-                <a class="dropdown-item" href="login/login.php">Login</a>
-                <a class="dropdown-item" href="login/register.php">Sign up</a>
+              > 
+              <?php
+              if(!empty($_SESSION['user_name'])){
+                  echo
+                  "
+                  <a class='dropdown-item' href='login/logout.php'>Logout</a>
+                  ";
+              } else{
+                echo 
+                "<a class='dropdown-item' href='login/login.php'>Login</a>
+                <a class='dropdown-item' href='login/register.php'>Register</a>
+                ";
+              } 
+
+              ?>
               </div>
             </li>
           </ul>

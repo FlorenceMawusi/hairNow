@@ -1,60 +1,101 @@
 <?php
 
+//import connection file
+require('../Settings/connection.php');
+//require_once('product_class.php');
 
-require("../settings/db_class.php");
+// inherit the methods from Connection
+class Cart extends Connection{
 
-// require __DIR__.'./settings/db_class.php';
 
-
-class ShoppingCart extends db_connection
-{
-
-	function getCartItems($ip_address){
-		$sql = "SELECT p.product_id, p.product_cat, p.product_brand, p.product_price, p.product_title, p.product_desc, p.product_image, p.product_keywords, c.p_id, c.ip_add, c.qty FROM products AS p JOIN cart AS c ON p.product_id = c.p_id AND c.ip_add = '$ip_address'";
-		return $this->db_query($sql);
-	}
-	function getCartItemQty($ip_address){
-		$sql = "SELECT * FROM cart WHERE ip_add='$ip_address'";
-		return $this->db_query($sql);
-	}
-
-	function getCartItemsAmount($ip_address){
-		$sql = "SELECT SUM(product_price * qty) AS amount FROM products AS p JOIN cart AS c ON p.product_id = c.p_id AND c.ip_add = '$ip_address'";
-		return $this->db_query($sql);
-	}
-
-	function addToCart($prod_id, $ip_adr, $qty){
-		 $sql = "INSERT INTO cart(p_id, ip_add, qty) VALUES('$prod_id','$ip_adr','$qty')";
-        return $this->db_query($sql);
-	}
-
-	function validateCart($ip_address, $prod_id){
-		$sql = "SELECT * FROM `cart` WHERE `ip_add`='$ip_address' AND `p_id`='$prod_id'";
-		return $this->db_query($sql);
-	}
-
-	function removeCartItem($prod_id, $ip_address){
-		$sql = "DELETE FROM cart WHERE ip_add='$ip_address' AND p_id='$prod_id'";
-		return $this->db_query($sql);
-	}
-	function updateCartQuantity($prod_id, $qty, $ip_address){
-		$sql = "UPDATE cart SET qty='$qty' WHERE ip_add='$ip_address' AND p_id='$prod_id'";
-		return $this->db_query($sql);
-	}
-
-	function deletecart($ip_address){
-		$sql="DELETE FROM cart WHERE ip_add='$ip_address'";
-		return $this->db_query($sql);
+    // addCart
+	function addCart($p_id, $ip_add,$c_id,$qty){
+		if($c_id == null){
+			$query = "insert into cart
+			(p_id, ip_add,qty)
+			values('$p_id', '$ip_add','$qty')";
+		} else{
+			$query = "insert into cart
+			(p_id, ip_add,c_id,qty)
+			values('$p_id', '$ip_add','$c_id','$qty')";
+		}
+		
+		// return true or false
+		return $this->query($query);
+		// echo $this->query($query);
 
 	}
-	function insertorders($user_id, $prod_id, $qty, $invoice, $status){
-		$sql="INSERT INTO orders (customer_id, product_id, qty, invoice_no, status, order_date) VALUES ('$user_id', '$prod_id','$qty', '$invoice', '$status', NOW())";
-		return $this->db_query($sql);
+
+	function updateCartQty($p_id, $ip_add,$c_id,$qty){
+		if(!empty($_SESSION['user_id'])){
+			$query = "update cart
+			set qty = '$qty'
+			where p_id = '$p_id' and c_id = '$c_id' ";
+		} else{
+			$query = "update cart
+			set qty = '$qty'
+			where p_id = '$p_id' and ip_add = '$ip_add' ";
+		}
+		
+		// return true or false
+		return $this->query($query);
 	}
 
-	function insertpayment($amount,$user_id,$cc){
-		$sql="INSERT INTO payment(amt,customer_id,currency, payment_date) VALUES ('$amount','$user_id','$cc', NOW())";
-		return $this->db_query($sql);
+
+
+    function deleteCart($c_id, $ip_add, $p_id){
+		if(!empty($_SESSION['user_id'])){
+			$query = "delete from cart where c_id = '$c_id' and p_id = '$p_id' ";
+
+		} else{
+			$query = "delete from cart where ip_add = '$ip_add' and p_id = '$p_id' ";
+		}
+
+		// return true or false
+		return $this->query($query);
+
 	}
+
+
+    //checks if a particular cart already exists
+	function checkProdExist($p_id, $c_id, $ip_add){
+
+		$query = "select * from cart
+		where p_id = '$p_id' and c_id = '$c_id' 
+		or p_id = '$p_id' and ip_add = '$ip_add'";
+		
+
+		// return true or false
+		$this->query($query);
+
+		//fetch the values
+		return $this->fetch();
+		
+
+    }
+    
+    //view all products in cart according to customer
+	function viewCart($u_id){
+
+		if(!empty($_SESSION['user_id'])){
+			$query = "select products.product_title, products.product_price,
+			products.product_desc, products.product_image, 
+			cart.p_id, cart.c_id, cart.ip_add, cart.qty from cart, products 
+			where cart.c_id = '$u_id' and products.product_id = cart.p_id";
+		} else {
+			$query = "select products.product_title, products.product_price,
+			products.product_desc, products.product_image, 
+			cart.p_id, cart.c_id, cart.ip_add, cart.qty from cart, products 
+			where cart.ip_add = '$u_id' and products.product_id = cart.p_id";
+		}
+		
+
+		// return true or false
+        $this->query($query);
+        
+        //return the fetched values
+        return $this->fetch();
+
+	}
+    
 }
-?>
