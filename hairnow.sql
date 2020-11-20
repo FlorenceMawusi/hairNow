@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2020 at 06:18 PM
+-- Generation Time: Nov 18, 2020 at 11:49 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -25,6 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `brand_id` int(10) NOT NULL,
+  `brand_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `cat_id` int(10) NOT NULL,
+  `cat_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer_registry`
 --
 
@@ -37,7 +59,8 @@ CREATE TABLE `customer_registry` (
   `c_country` varchar(50) NOT NULL,
   `c_city` varchar(50) NOT NULL,
   `c_contact` int(15) NOT NULL,
-  `customer_image` varchar(10) NOT NULL
+  `customer_image` varchar(10) DEFAULT NULL,
+  `user_role` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -49,9 +72,12 @@ CREATE TABLE `customer_registry` (
 CREATE TABLE `hairproducts` (
   `productID` int(11) NOT NULL,
   `productname` varchar(100) NOT NULL,
+  `product_cat` int(10) NOT NULL,
+  `product_brand` int(10) NOT NULL,
   `productdescription` text NOT NULL,
   `productprice` double NOT NULL,
-  `productimage` varchar(100) NOT NULL
+  `productimage` varchar(100) NOT NULL,
+  `product_keywords` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -102,6 +128,7 @@ CREATE TABLE `productorders` (
 CREATE TABLE `shopping_cart` (
   `product_id` int(10) NOT NULL,
   `customer_id` int(10) NOT NULL,
+  `ip_add` varchar(50) NOT NULL,
   `quantity` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

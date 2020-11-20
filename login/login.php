@@ -9,11 +9,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="css/mdb.min.css" rel="stylesheet">
+  <link href="../css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="css/style.min.css" rel="stylesheet">
+  <link href="../css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -103,45 +103,25 @@
         <div class="col-md-6">
 
           <!-- Default form login -->
-          <form class="text-center" action="#!">
+          <form class="text-center" action="loginproc.php" method="POST">
 
             <p class="h4 mb-4">Sign in</p>
+		        <span class="text-danger"><?php if(!empty($_SESSION['login_err'])){echo $_SESSION['login_err'];}?></span>
 
             <!-- Email -->
-            <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+            <input type="email" name="cemail" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
  
             <!-- Password -->
-            <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-
-            <div class="d-flex justify-content-around">
-              <div>
-                <!-- Remember me -->
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                  <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
-                </div>
-              </div>
-              <div>
-                <!-- Forgot password -->
-                <a href="">Forgot password?</a>
-              </div>
-            </div>
+            <input type="password" name="cpass" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
 
             <!-- Sign in button -->
-            <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+            <button class="btn btn-info btn-block my-4" name="submit" type="submit">Sign in</button>
 
             <!-- Register -->
             <p>Not a member?
-              <a href="">Register</a>
+              <a href="register.php">Register</a>
             </p>
 
-            <!-- Social login -->
-            <p>or sign in with:</p>
-
-                <a href="#" class="mx-1" role="button"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="mx-1" role="button"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="mx-1" role="button"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="mx-1" role="button"><i class="fab fa-github"></i></a>
 
           </form>
           <!-- Default form login -->

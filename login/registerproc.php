@@ -61,7 +61,15 @@ if (isset($_POST['submit'])) {
 		$city_err = "";
 		$rcity = $_POST['ccity'];
 	}
-	$_SESSION['city_err'] = $city_err;	
+	$_SESSION['city_err'] = $city_err;
+	
+	if(empty(trim($_POST["caddress"]))){
+		$address_err = "Please enter your address.";
+	}else{
+		$address_err = "";
+		$raddress = $_POST['caddress'];
+	}
+	$_SESSION['city_err'] = $city_err;
 
 	if(empty(trim($_POST["ccontact"]))){
 		$contact_err = "Please enter your contact.";
@@ -73,27 +81,28 @@ if (isset($_POST['submit'])) {
 
 	//Check for errors
 	if (empty(trim($fullname_err)) && empty(trim($email_err)) && empty(trim($password_err)) 
-	&& empty(trim($country_err)) && empty(trim($city_err)) && empty(trim($contact_err))) {
+	&& empty(trim($country_err)) && empty(trim($city_err)) && empty(trim($address_err)) && empty(trim($contact_err))) {
 		//encrypt password
 		$hash = password_hash($rpass, PASSWORD_DEFAULT);
 
 		//insert into the controller
-		$x = addCustomer_c($rname, $remail, $hash, $rcountry, $rcity, $rcontact);
+		$x = addCustomer_c($rname, $remail, $hash, $raddress, $rcountry, $rcity, $rcontact);
 		// if it returns true 
 		if($x){
-			echo "inserted successfully";
 
+			echo"success";
 			//redirect to login page
-			header("Location: http://localhost/E-Commerce/Lab/Login/login.php");
+			header("Location: ../index.php");
 			exit();
 		}
 		else{
-			echo "insertion failed";
+			echo "insertion into db failed, must be an error";
+			header("Location: register.php");
 		}
 
 	}else {
 		//redirect back to register page.
-		header("Location: http://localhost/E-Commerce/Lab/Login/register.php");
+		header("Location: register.php");
 		exit();
 	}
 	

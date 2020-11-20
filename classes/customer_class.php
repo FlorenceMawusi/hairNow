@@ -6,10 +6,10 @@ require('../Settings/connection.php');
 class Customer extends Connection{
 
 
-    function addCustomer($name, $email, $pass, $country, $city, $contact){
+    function addCustomer($name, $email, $pass, $address, $country, $city, $contact){
 
-        $query = "insert into customer(customer_name, customer_email, customer_pass, customer_country, customer_city, customer_contact, user_role ) 
-		values('$name', '$email', '$pass', '$country', '$city', '$contact', 2)";
+        $query = "insert into customer_registry(customer_name, customer_email, customer_password, c_address, c_country, c_city, c_contact, user_role ) 
+		values('$name', '$email', '$pass', '$address', '$country', '$city','$contact', 2)";
 		
 		// return true or false
 		return $this->query($query);
@@ -19,7 +19,7 @@ class Customer extends Connection{
 
 	function deleteCustomer($id){
 
-		$query = "delete from customer where customer_id = '$id'";
+		$query = "delete from customer_registry where customerID = '$id'";
 
 		// return true or false
 		return $this->query($query);
@@ -27,12 +27,12 @@ class Customer extends Connection{
 	}
 
 
-	function updateCustomer($name, $email, $pass, $country, $city, $contact, $id){
+	function updateCustomer($name, $email, $pass, $address, $country, $city, $contact,$id){
 
-        $query = "update customer 
-        set customer_name = '$name', customer_email = '$email', customer_pass = '$pass', 
-        customer_country = '$country', customer_city = '$city', customer_contact = '$contact'
-        where customer_id = '$id'";
+        $query = "update customer_registry 
+        set customer_name = '$name', customer_email = '$email', customer_password = '$pass', c_address = '$address', 
+        c_country = '$country', c_city = '$city', c_contact = '$contact'
+        where customerID = '$id'";
 
 		// return true or false
         return $this->query($query);
@@ -41,7 +41,7 @@ class Customer extends Connection{
 	}
 
 	function checkEmail($email){
-		$query = "select * from customer
+		$query = "select * from customer_registry
 		where customer_email = '$email'";
 
 		$this->query($query);
@@ -49,8 +49,8 @@ class Customer extends Connection{
 	}
 
 	function login($email, $pass){
-		$query = "select * customer
-		where customer_email = '$email' and customer_pass = '$pass'";
+		$query = "select *  from customer_registry
+		where customer_email = '$email' and customer_password = '$pass'";
 		
 		$this->query($query);
 

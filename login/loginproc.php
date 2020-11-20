@@ -20,8 +20,12 @@ if (isset($_POST['submit'])) {
 	if ($getDetails) {
 		//email exist, continue to password
 		//get password from database
-		$hash = $getDetails['customer_pass'];
 
+		
+		$hash = $getDetails['customer_password'];
+		echo $hash;
+		$working = password_verify($_POST['cpass'], `$hash`);
+		echo 'working',$working;
 
 		//verify password
 
@@ -33,21 +37,25 @@ if (isset($_POST['submit'])) {
 			$_SESSION["user_role"] = $getDetails['user_role'];
 			$_SESSION["user_name"] = $getDetails['customer_name'];
 			
+			echo "success";
 			//redirection to home page
-			header('Location: ../index.php');
+			//header('Location: ../index.php');
 			//to make sure the code below does not execute after redirection
-			exit;
+			exit();
 		} else 
 		{
 			//echo appropriate error
 			$_SESSION['login_err'] ='incorrect username or password';
-			header('Location: login.php');
+			echo "incorrect password ";
+			//header('Location: login.php');
 		}
 
 	} else{
 		//echo appropriate error
 		$_SESSION['login_err'] = "incorrect username or password";
-		header('Location: login.php');
+		echo "user not found";
+
+		//header('Location: login.php');
 	}
 }
 

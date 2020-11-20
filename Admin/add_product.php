@@ -1,10 +1,16 @@
 <?php
 //start session
 session_start();
-require('../Controllers/product_controller.php');
 
+require('../Controllers/product_controller.php');
+$product_list = viewProducts_c();
 $brand_list = viewBrands_c();
+$category_list = viewCategories_c();
+
 ?>
+
+
+
 
 <!doctype html>
 <html lang="en">
@@ -12,7 +18,7 @@ $brand_list = viewBrands_c();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Brand</title>
+  <title>Product</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -29,10 +35,10 @@ $brand_list = viewBrands_c();
     }
 </style>
 </head>
-  <body>
-    <!-- Navbar -->
-    <nav
-      class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar "
+  <body >
+     <!-- Navbar -->
+     <nav
+      class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar"
     >
       <div class="container">
         <!-- Brand -->
@@ -145,7 +151,7 @@ $brand_list = viewBrands_c();
 
 <!-- Button trigger modal for add button -->
 <button type="button" style = "margin: 1em" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
-  Add Brand
+  Add Product
 </button>
 
 <!-- Add Modal -->
@@ -153,19 +159,63 @@ $brand_list = viewBrands_c();
   <div class="modal-dialog">
     <div class="modal-content"> 
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Brand</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class = "login-form" >
-            <form id ="form" action = "../Actions/add_brand.php" method="get" >
+            <form id ="form" action = "../Actions/add_product.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="brand_name">Brand Name</label>
-                    <input type="text" required class="form-control" id="brand_name" name = "brand_name" placeholder="Enter the brand name."> 
+                    <label for="product_cat">Product Category</label>
+
+                    <select name="product_cat" class="form-control">
+                        <option selected>Choose...</option>
+                        <?php
+                        foreach($category_list as $value){
+                            $cat_name = $value['cat_name'];
+                            $cat_id = $value['cat_id'];
+                            echo "<option value = '$cat_id' >$cat_name</option>";  
+                        }
+                        ?>
+                    </select>
                 </div>
-                
+                <div class="form-group">
+                    <label for="product_brand">Product Brand</label>
+                    <select name="product_brand" class="form-control">
+                        <option selected>Choose...</option>
+                        <?php 
+                        foreach($brand_list as $value){
+                            $brand_name = $value['brand_name'];
+                            $brand_id = $value['brand_id'];
+                            echo "<option value = '$brand_id'>$brand_name</option>";  
+                        }
+                        ?>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label for="product_title">Product Title</label>
+                    <input type="text" required class="form-control" name = "product_title" placeholder="Enter the product title."> 
+                </div>
+                <div class="form-group">
+                    <label for="product_price">Product Price</label>
+                    <input type="text" required class="form-control" name = "product_price" placeholder="Enter the product price"> 
+                </div>
+                <div class="form-group">
+                    <label for="product_desc">Product Description</label>
+                    <input type="text" required class="form-control" name = "product_desc" placeholder="Enter the product description"> 
+                </div>
+                <div class="form-group">
+                    <label for="product_keywords">Product Keyword(s)</label>
+                    <input type="text" required class="form-control" name = "product_keywords" placeholder="Enter the product keyword(s)"> 
+                </div>
+                <div class="form-group">
+                    <label for="product_image">Product Image</label><br>
+                    <input type="file"  name = "product_image" accept="image/*"> 
+                </div>
+
                 <input type="submit" name = "submit" value = "Save Changes" class="btn btn-primary float-right"/>
                 <button type="button" class="btn btn-secondary float-right" data-dismiss="modal" style = "margin-right: 1em">Close</button>
                 <br>
@@ -186,31 +236,43 @@ $brand_list = viewBrands_c();
 	
         <div class=" mx-auto" style="width: 35rem;">
         <?php 
-            if(!empty($_SESSION['brand_err'])){
-                $err= $_SESSION['brand_err'];
+            if(!empty($_SESSION['product_err'])){
+                $err= $_SESSION['product_err'];
                 echo "<span class='text-danger'>$err</span>";
                 
             }
-            elseif(!empty($_SESSION['brand_success'])){
-                $success= $_SESSION['brand_success'];
-                echo "<span class='text-success'>$success</span>";
-            }
+
         ?>
-            <h2 class="text-center">Brands in your store</h2>
+            <h2 class="text-center">Products in your store</h2>
             <div class="card shadow rounded mx-auto" style="width: 35rem;">
             
                 <ul class="list-group list-group-flush">
                 <?php
-                foreach($brand_list as $value) {
-                    $brand_name = $value['brand_name'];
-                    $brand_id = $value['brand_id'];
+
+                foreach($product_list as $value) {
+                    $product_title = $value['product_title'];
+                    $product_id = $value['product_id'];
+                    $product_cat = $value['product_cat'];
+                    $product_desc = $value['product_desc'];
+                    $product_brand = $value['product_brand'];
+                    $product_price = $value['product_price'];
+                    $product_keywords = $value['product_keywords'];
+                    $product_image = $value['product_image'];
                     echo "              
-                    <li class='list-group-item'> $brand_name
+                    <li class='list-group-item'> $product_title
                     <button type='button' style = 'margin-left: 1em' class='btn btn-danger float-right'>Delete</button>
-                    <form action = 'edit_brand.php' method = 'post' style = 'display: inline-block;
+                    <form action = 'edit_product.php' method = 'post' style = 'display: inline-block;
                     float: right';>
-                    <input type=hidden name = 'brand_id' value = '$brand_id'></input>
-                    <input type=hidden name = 'brand_name' value = '$brand_name'></input>
+                    <input type=hidden name = 'product_id' value = '$product_id'></input>
+                    <input type=hidden name = 'product_title' value = '$product_title'></input>
+                    <input type=hidden name = 'product_cat' value = '$product_cat'></input>
+                    <input type=hidden name = 'product_desc' value = '$product_desc'></input>
+                    <input type=hidden name = 'product_brand' value = '$product_brand'></input>
+                    <input type=hidden name = 'product_price' value = '$product_price'></input>
+                    <input type=hidden name = 'product_keywords' value = '$product_keywords'></input>
+                    <input type=hidden name = 'product_image' value = '$product_image'></input>
+                    
+                    
                     <button id='edit_button' name ='edit_button' type='submit' value='Edit' class='btn btn-success float-right'>Edit</button>
                     </form>
                     </li>";
@@ -235,8 +297,9 @@ $brand_list = viewBrands_c();
 
 <?php
 
-unset($_SESSION['brand_err']);
-unset($_SESSION['brand_success']);
+
+unset($_SESSION['product_err']);
+unset($_SESSION['product_success']);
 
 
 ?>

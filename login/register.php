@@ -103,38 +103,50 @@
         <div class="col-md-6">
 
           <!-- Default form register -->
-          <form class="text-center" action="#!">
+          <form class="text-center" action="registerproc.php" method="POST">
 
             <p class="h4 mb-4">Sign up</p>
             
             <!-- Name -->
-            <input type="email" id="defaultRegisterFormFirstName" class="form-control mb-4" placeholder="Name">
+            <input type="text" name="cname" id="defaultRegisterFormFirstName" class="form-control mb-4" placeholder="Name">
+            <span class="text-danger"><?php if(!empty($_SESSION['fullname_err'])){echo $_SESSION['fullname_err'];}?></span>
 
             <!-- E-mail -->
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+            <input type="email" name="cemail" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+            <span class="text-danger"><?php if(!empty($_SESSION['email_err'])){echo $_SESSION['email_err'];}?></span>
+
 
             <!-- Password -->
-            <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
+            <input type="password" name="cpass" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
               aria-describedby="defaultRegisterFormPasswordHelpBlock">
+              <span class="text-danger"><?php if(!empty($_SESSION['password_err'])){echo $_SESSION['password_err'];}?></span>
+
             <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
               It is advisable to use a strong password
             </small>
 
             <!-- Address -->
-            <input type="email" id="defaultRegisterFormAddress" class="form-control mb-4" placeholder="Adress">
+            <input type="text" name="caddress" id="defaultRegisterFormAddress" class="form-control mb-4" placeholder="Adress">
+            <span class="text-danger"><?php if(!empty($_SESSION['address_err'])){echo $_SESSION['address_err'];}?></span>
+
 
             <!-- City -->
-            <input type="email" id="defaultRegisterFormCity" class="form-control mb-4" placeholder="City">
+            <input type="text" name="ccity" id="defaultRegisterFormCity" class="form-control mb-4" placeholder="City">
+            <span class="text-danger"><?php if(!empty($_SESSION['city_err'])){echo $_SESSION['city_err'];}?></span>
+
 
             <!-- Country -->
-            <input type="email" id="defaultRegisterFormCountry" class="form-control mb-4" placeholder="Country">
+            <input type="text" name="ccountry" id="defaultRegisterFormCountry" class="form-control mb-4" placeholder="Country">
+            <span class="text-danger"><?php if(!empty($_SESSION['country_err'])){echo $_SESSION['country_err'];}?></span>
+
 
             <!-- Phone number -->
-            <input type="number" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number">
+            <input type="number" name="ccontact" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number">
+            <span class="text-danger"><?php if(!empty($_SESSION['contact_err'])){echo $_SESSION['contact_err'];}?></span>
 
 
             <!-- Sign up button -->
-            <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+            <button class="btn btn-info my-4 btn-block" name="submit" type="submit">Sign up</button>
 
 
             <!-- Terms of service -->

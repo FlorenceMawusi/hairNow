@@ -15,12 +15,7 @@
   <!-- Your custom styles (optional) -->
   <link href="css/style.min.css" rel="stylesheet">
 
-  <style>
-      img {
-          width: 200px;
-          height: 200px;
-      }
-  </style>
+
 </head>
 
 <body>

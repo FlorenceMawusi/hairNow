@@ -3,13 +3,13 @@
 require('../Classes/customer_class.php');
 
 
-function addCustomer_c($name, $email, $pass, $country, $city, $contact){
+function addCustomer_c($name, $email, $pass, $address, $country, $city, $contact){
 
 	// create an instance of the Product Class
 	$customer_instance = new Customer();
 
 	// call the method from the class
-	$x = $customer_instance->addCustomer($name, $email, $pass, $country, $city, $contact);
+	$x = $customer_instance->addCustomer($name, $email, $pass, $address, $country, $city, $contact);
 	if($x){
 		return true;
 	}
@@ -55,13 +55,13 @@ function login_c($email, $pass){
 
 
 
-function updateCustomer_c($name, $email, $pass, $country, $city, $contact, $id){
+function updateCustomer_c($name, $email, $pass, $address, $country, $city, $contact, $image,$id){
 
 	// create an instance of the Product Class
 	$customer_instance = new Customer();
 
 	// call the method from the class
-	$x = $customer_instance->updateCustomer($name, $email, $pass, $country, $city, $contact, $id);
+	$x = $customer_instance->updateCustomer($name, $email, $pass, $address, $country, $city, $contact, $image,$id);
 
 	if($x){
 		return true;

@@ -5,7 +5,7 @@
 
 define('SERVER', 'localhost');
 define('USER', 'root');
-define('DATABASE', 'shoppn');
+define('DATABASE', 'hairnow');
 define('PASSWORD', '');
 
 ?>

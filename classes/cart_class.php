@@ -9,15 +9,15 @@ class Cart extends Connection{
 
 
     // addCart
-	function addCart($p_id, $ip_add,$c_id,$qty){
+	function addCart($p_id, $c_id, $ip_add, $qty){
 		if($c_id == null){
-			$query = "insert into cart
-			(p_id, ip_add,qty)
+			$query = "insert into shopping_cart
+			(product_id, ip_add, quantity)
 			values('$p_id', '$ip_add','$qty')";
 		} else{
-			$query = "insert into cart
-			(p_id, ip_add,c_id,qty)
-			values('$p_id', '$ip_add','$c_id','$qty')";
+			$query = "insert into shopping_cart
+			(product_id, customer_id, ip_add, quantity)
+			values('$p_id', '$c_id', '$ip_add','$qty')";
 		}
 		
 		// return true or false
@@ -26,15 +26,15 @@ class Cart extends Connection{
 
 	}
 
-	function updateCartQty($p_id, $ip_add,$c_id,$qty){
+	function updateCartQty($p_id, $c_id, $ip_add,$qty){
 		if(!empty($_SESSION['user_id'])){
-			$query = "update cart
-			set qty = '$qty'
-			where p_id = '$p_id' and c_id = '$c_id' ";
+			$query = "update shopping_cart
+			set quantity = '$qty'
+			where product_id = '$p_id' and customer_id = '$c_id' ";
 		} else{
-			$query = "update cart
-			set qty = '$qty'
-			where p_id = '$p_id' and ip_add = '$ip_add' ";
+			$query = "update shopping_cart
+			set quantity = '$qty'
+			where product_id = '$p_id' and ip_add = '$ip_add' ";
 		}
 		
 		// return true or false
@@ -45,10 +45,10 @@ class Cart extends Connection{
 
     function deleteCart($c_id, $ip_add, $p_id){
 		if(!empty($_SESSION['user_id'])){
-			$query = "delete from cart where c_id = '$c_id' and p_id = '$p_id' ";
+			$query = "delete from shopping_cart where customer_id = '$c_id' and product_id = '$p_id' ";
 
 		} else{
-			$query = "delete from cart where ip_add = '$ip_add' and p_id = '$p_id' ";
+			$query = "delete from shopping_cart where ip_add = '$ip_add' and product_id = '$p_id' ";
 		}
 
 		// return true or false
@@ -60,9 +60,9 @@ class Cart extends Connection{
     //checks if a particular cart already exists
 	function checkProdExist($p_id, $c_id, $ip_add){
 
-		$query = "select * from cart
-		where p_id = '$p_id' and c_id = '$c_id' 
-		or p_id = '$p_id' and ip_add = '$ip_add'";
+		$query = "select * from shopping_cart
+		where product_id = '$p_id' and customer_id = '$c_id' 
+		or product_id = '$p_id' and ip_add = '$ip_add'";
 		
 
 		// return true or false
@@ -74,19 +74,19 @@ class Cart extends Connection{
 
     }
     
-    //view all products in cart according to customer
+    //view all hairhairproducts in cart according to customer
 	function viewCart($u_id){
 
 		if(!empty($_SESSION['user_id'])){
-			$query = "select products.product_title, products.product_price,
-			products.product_desc, products.product_image, 
-			cart.p_id, cart.c_id, cart.ip_add, cart.qty from cart, products 
-			where cart.c_id = '$u_id' and products.product_id = cart.p_id";
+			$query = "select hairproducts.productname, hairproducts.productprice,
+			hairproducts.productdescription, hairproducts.productimage, 
+			shopping_cart.product_id, shopping_cart.customer_id, shopping_cart.ip_add, shopping_cart.quantity from shopping_cart, hairproducts 
+			where shopping_cart.customer_id = '$u_id' and hairproducts.productID = shopping_cart.product_id";
 		} else {
-			$query = "select products.product_title, products.product_price,
-			products.product_desc, products.product_image, 
-			cart.p_id, cart.c_id, cart.ip_add, cart.qty from cart, products 
-			where cart.ip_add = '$u_id' and products.product_id = cart.p_id";
+			$query = "select hairproducts.productname, hairproducts.productprice,
+			hairproducts.productdescription, hairproducts.productimage, 
+			shopping_cart.product_id, shopping_cart.customer_id, shopping_cart.ip_add, shopping_cart.quantity from shopping_cart, hairproducts 
+			where shopping_cart.ip_add = '$u_id' and hairproducts.productID = shopping_cart.p_id";
 		}
 		
 

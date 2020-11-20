@@ -2,7 +2,15 @@
 //start session
 session_start();
 require('../Controllers/product_controller.php');
+$brand_list = viewBrands_c();
+$category_list = viewCategories_c();
 
+$product_cat_id = $_POST['product_cat'];
+$product_cat = viewACategory_c($product_cat_id);
+
+
+$product_brand_id = $_POST['product_brand'];
+$product_brand = viewABrand_c($product_brand_id);
 ?>
 
 <!doctype html>
@@ -11,7 +19,7 @@ require('../Controllers/product_controller.php');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Category</title>
+  <title>Product</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -136,22 +144,68 @@ require('../Controllers/product_controller.php');
     <!-- Navbar -->
     <br><br><br>
     
-    
-    <div class = "login-form card shadow" style="width:50%; margin:auto; padding:2em;" >
+   
+    <div class = "login-form card shadow" style="width:50%; margin:auto; padding:2em;">
         
         
-        <h1>Edit Category</h1>
+        <h1>Edit Product</h1>
 		
-        <form id ="form" action = "../Actions/edit_category.php" method="post" >
-            <div class="form-group">
-                <label for="brand_name">Category Name</label>
-
-                <input type="text" value = "<?php if(isset($_POST['cat_name'])){ $cat_name = $_POST['cat_name'];}  if(isset($_POST['edit_button'])){echo"$cat_name";}?>" required class="form-control" id="cat_name" name = "cat_name">
-                <input type=hidden name = 'cat_id' value = "<?php echo $_POST['cat_id']?>" ></input>
-            </div>
+        <form id ="form" action = "../Actions/edit_product.php" method="post" enctype="multipart/form-data">
             
-			<input type="submit" name = "edit" value = "Save" class="btn btn-primary"/>
-			<br>
+                
+            <input type="hidden" required class="form-control" name = "product_id" value = "<?php echo $_POST['product_id'];?>" > 
+            
+            <div class="form-group">
+                <label for="product_cat">Product Category</label>
+
+                <select name="product_cat" class="form-control">
+                    <option value = '<?php echo $product_cat_id ?>'selected><?php echo $product_cat['cat_name'];?></option>
+                    <?php
+                    foreach($category_list as $value){
+                        $cat_name = $value['cat_name'];
+                        $cat_id = $value['cat_id'];
+                        echo "<option value = '$cat_id'>$cat_name</option>";  
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="product_brand">Product Brand</label>
+                <select name="product_brand" class="form-control">
+                    <option value = '<?php echo $product_brand_id ?>'selected><?php if(isset($product_cat['cat_name'])){echo $product_cat['cat_name'];} ?></option>
+                    <?php 
+                        foreach($brand_list as $value){
+                            $brand_name = $value['brand_name'];
+                            $brand_id = $value['brand_id'];
+                            echo "<option value = '$brand_id'>$brand_name</option>";  
+                        }
+                    ?>
+
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="product_title">Product Title</label>
+                <input type="text" required class="form-control" name = "product_title" value = "<?php echo $_POST['product_title'];?>" > 
+            </div>
+            <div class="form-group">
+                <label for="product_price">Product Price</label>
+                <input type="text" required class="form-control" name = "product_price" value = "<?php echo $_POST['product_price'];?>" > 
+            </div>
+            <div class="form-group">
+                <label for="product_desc">Product Description</label>
+                <input type="text" required class="form-control" name = "product_desc" value = "<?php echo $_POST['product_desc'];?>"  > 
+            </div>
+            <div class="form-group">
+                <label for="product_keywords">Product Keyword(s)</label>
+                <input type="text" required class="form-control" name = "product_keywords" value = "<?php echo $_POST['product_keywords'];?>" > 
+            </div>
+            <div class="form-group">
+                <label for="product_image">Product Image</label><br>
+                <input type="file"  name = "product_image" accept="image/*" value = "<?php echo $_POST['product_image'];?>" > 
+            </div>
+            <input type="submit" name = "edit" value = "Save" class="btn btn-primary"/>
+            <br>
         </form>
     </div>
     
@@ -167,10 +221,10 @@ require('../Controllers/product_controller.php');
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 
-<?php
 
-unset($_SESSION['cat_err']);
-unset($_SESSION['cat_success']);
+<?php
+unset($_SESSION['product_err']);
+unset($_SESSION['product_success']);
 
 
 ?>

@@ -9,11 +9,11 @@ class Product extends Connection{
 	
 	
     // addProduct
-	function addProduct($category, $brand, $title, $price, $desc, $image, $keywords){
+	function addProduct($title, $category, $brand, $desc,  $price, $image, $keywords){
 
-        $query = "insert into products
-        (product_cat, product_brand, product_title, product_price, product_desc, product_image, product_keywords)
-        values('$category', '$brand', '$title', '$price', '$desc', '$image', '$keywords')";
+        $query = "insert into hairproducts
+        (productname, product_cat, product_brand, productdescription, productprice,  productimage, product_keywords)
+        values('$title', '$category', '$brand', '$desc', '$price',  '$image', '$keywords')";
 		
 		// return true or false
 		return $this->query($query);
@@ -23,7 +23,7 @@ class Product extends Connection{
 
 	function deleteProduct($id){
 
-		$query = "delete from products where product_id = '$id'";
+		$query = "delete from hairproducts where productID= '$id'";
 
 		// return true or false
 		return $this->query($query);
@@ -31,19 +31,19 @@ class Product extends Connection{
 	}
 
 
-	function updateProduct($id, $category, $brand, $title, $price, $desc, $image, $keywords){
+	function updateProduct($id, $title, $category, $brand,  $desc, $price, $image, $keywords){
 		if(!empty($image)){
 			
-			$query = "update products set product_id = '$id', product_cat = '$category', 
-			product_brand = '$brand', product_title = '$title', product_price = '$price', 
-			product_desc = '$desc', product_image = '$image', product_keywords = '$keywords'
-			where product_id = '$id'";
+			$query = "update hairproducts set productID = '$id', productname = '$title',
+			product_cat = '$category', product_brand = '$brand',productdescription = '$desc', productprice = '$price', 
+			productimage = '$image', product_keywords = '$keywords'
+			where productID= '$id'";
 		}else{
 		
-			$query = "update products set product_id = '$id', product_cat = '$category', 
-			product_brand = '$brand', product_title = '$title', product_price = '$price', 
-			product_desc = '$desc', product_keywords = '$keywords'
-			where product_id = '$id'";
+			$query = "update hairproducts set productID = '$id', productname = '$title', 
+			product_cat = '$category', product_brand = '$brand', productdescription = '$desc', productprice = '$price', 
+			product_keywords = '$keywords'
+			where productID = '$id'";
 		}
         
 
@@ -55,8 +55,8 @@ class Product extends Connection{
 	//checks if a particular product already exists
 	function checkProdExist($title){
 
-		$query = "select product_title from products
-		where product_title = '$title'";
+		$query = "select productname from hairproducts
+		where productname = '$title'";
 		
 
 		// return true or false
@@ -71,8 +71,8 @@ class Product extends Connection{
 	//view A Product
 	function viewAProduct($product_id){
 
-		$query = "select * from products
-		where product_id = '$product_id'";
+		$query = "select * from hairproducts
+		where productID = '$product_id'";
 
 		// return true or false
 		$this->query($query);
@@ -88,11 +88,11 @@ class Product extends Connection{
 	function viewProducts($search_value){
 
 		if(empty($search_value)){
-			$query = "select * from products";
+			$query = "select * from hairproducts";
 		}
 		else{
-			$query = "select * from products
-			where product_title like '%$search_value%'";
+			$query = "select * from hairproducts
+			where productname like '%$search_value%'";
 		}
 
 		// return true or false

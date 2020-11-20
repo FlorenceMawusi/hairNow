@@ -1,3 +1,17 @@
+<?php
+//start session
+session_start();
+
+require('../Controllers/product_controller.php');
+if (isset($_POST['search']) && (!empty($_POST['product_title']))){
+
+    $product_list = viewProducts_c($_POST['product_title']);
+}else{
+    $product_list = viewProducts_c();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -353,13 +367,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Shirts</a>
+                <a class="nav-link" href="#">Hair Tools</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Sport wears</a>
+                <a class="nav-link" href="#">Hair Pomades</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Outwears</a>
+                <a class="nav-link" href="#">Shampoos</a>
               </li>
             </ul>
             <!-- Links -->
@@ -384,38 +398,38 @@
           <!--Grid row-->
           <div class="row wow fadeIn">
             <!--Grid column-->
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class='col-lg-3 col-md-6 mb-4'>
               <!--Card-->
-              <div class="card">
+              <div class='card'>
                 <!--Card image-->
-                <div class="view overlay">
+                <div class='view overlay'>
                   <img
-                    src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
-                    class="card-img-top"
-                    alt=""
+                    src='https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg'
+                    class='card-img-top'
+                    alt=''
                   />
                   <a>
-                    <div class="mask rgba-white-slight"></div>
+                    <div class='mask rgba-white-slight'></div>
                   </a>
                 </div>
                 <!--Card image-->
 
                 <!--Card content-->
-                <div class="card-body text-center">
+                <div class='card-body text-center'>
                   <!--Category & Title-->
-                  <a href="" class="grey-text">
+                  <a href='' class='grey-text'>
                     <h5>Shirt</h5>
                   </a>
                   <h5>
                     <strong>
-                      <a href="" class="dark-grey-text"
+                      <a href='' class='dark-grey-text'
                         >Denim shirt
-                        <span class="badge badge-pill danger-color">NEW</span>
+                        <span class='badge badge-pill danger-color'>NEW</span>
                       </a>
                     </strong>
                   </h5>
 
-                  <h4 class="font-weight-bold blue-text">
+                  <h4 class='font-weight-bold blue-text'>
                     <strong>120$</strong>
                   </h4>
                 </div>
@@ -855,4 +869,11 @@
       new WOW().init();
     </script>
   </body>
+
+  
+<?php
+    unset($_SESSION['cart_err']);
+    unset($_SESSION['cart_success']);
+    
+?>
 </html>
