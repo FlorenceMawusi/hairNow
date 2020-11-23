@@ -1,7 +1,7 @@
 <?php
 
 //import connection file
-require('../Settings/connection.php');
+require_once('../Settings/connection.php');
 
 // inherit the methods from Connection
 class Product extends Connection{

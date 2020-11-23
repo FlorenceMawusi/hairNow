@@ -1,6 +1,6 @@
 <?php
 
-require('../Settings/connection.php');
+require_once('../Settings/connection.php');
 
 // inherit the methods from Connection
 class Customer extends Connection{

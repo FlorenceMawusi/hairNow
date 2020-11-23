@@ -1,6 +1,6 @@
 <?php
 
-require('../Classes/customer_class.php');
+require_once('../Classes/customer_class.php');
 
 
 function addCustomer_c($name, $email, $pass, $address, $country, $city, $contact){

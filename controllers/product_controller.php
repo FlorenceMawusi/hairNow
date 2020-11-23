@@ -1,6 +1,5 @@
 <?php
-
-require('../Classes/product_class.php');
+require_once('../Classes/product_class.php');
 
 
 function addProduct_c($category, $brand, $title, $price, $desc, $image, $keywords){

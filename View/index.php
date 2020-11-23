@@ -2,13 +2,13 @@
 //start session
 session_start();
 
-// require('Controllers/product_controller.php');
-// if (isset($_POST['search']) && (!empty($_POST['product_title']))){
+require_once('../Controllers/product_controller.php');
+if (isset($_POST['search']) && (!empty($_POST['product_title']))){
 
-//     $product_list = viewProducts_c($_POST['product_title']);
-// }else{
-//     $product_list = viewProducts_c();
-// }
+    $product_list = viewProducts_c($_POST['product_title']);
+}else{
+    $product_list = viewProducts_c();
+}
 
 ?>
 
@@ -28,11 +28,11 @@ session_start();
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet" />
+    <link href="../css/mdb.min.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
-    <link href="css/style.min.css" rel="stylesheet" />
+    <link href="../css/style.min.css" rel="stylesheet" />
     <style type="text/css">
       html,
       body,
@@ -199,7 +199,7 @@ session_start();
           <div
             class="view"
             style="
-              background-image: url('img/carrousel_img_one.jpg');
+              background-image: url('../img/carrousel_img_one.jpg');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -237,7 +237,7 @@ session_start();
           <div
             class="view"
             style="
-              background-image: url('img/carrousel_img_two.jpg');
+              background-image: url('../img/carrousel_img_two.jpg');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -275,7 +275,7 @@ session_start();
           <div
             class="view"
             style="
-              background-image: url('img/carrousel_img_three.jpg');
+              background-image: url('../img/carrousel_img_three.jpg');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -856,13 +856,13 @@ session_start();
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="../js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="../js/mdb.min.js"></script>
     <!-- Initializations -->
     <script type="text/javascript">
       // Animations initialization

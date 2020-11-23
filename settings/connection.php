@@ -1,6 +1,6 @@
 <?php 
 
-require('credentials.php');
+require_once('credentials.php');
 
 class Connection{
 

@@ -1,6 +1,6 @@
 <?php
 
-require('../Classes/cart_class.php');
+require_once('../Controllers/cart_controller.php');
 
 
 function addCart_c($p_id, $ip_add,$c_id,$qty){
