@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -250,5 +253,12 @@
 
   </script>
 </body>
+<?php
+// remove all session variables
+session_unset();
+
+// destroy the session
+session_destroy();
+?>
 
 </html>

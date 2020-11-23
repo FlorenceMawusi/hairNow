@@ -124,12 +124,12 @@ $brand_list = viewBrands_c();
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='../Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='login/login.php'>Login</a>
-                <a class='dropdown-item' href='login/register.php'>Register</a>
+                "<a class='dropdown-item' href='../Login/login.php'>Login</a>
+                <a class='dropdown-item' href='../Login/register.php'>Register</a>
                 ";
               } 
 
@@ -163,7 +163,7 @@ $brand_list = viewBrands_c();
             <form id ="form" action = "../Actions/add_brand.php" method="get" >
                 <div class="form-group">
                     <label for="brand_name">Brand Name</label>
-                    <input type="text" required class="form-control" id="brand_name" name = "brand_name" placeholder="Enter the brand name."> 
+                    <input type="text" required class="form-control" id="brand_name" name ="brand_name" placeholder="Enter the brand name."> 
                 </div>
                 
                 <input type="submit" name = "submit" value = "Save Changes" class="btn btn-primary float-right"/>

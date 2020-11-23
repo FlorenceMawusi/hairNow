@@ -2,13 +2,13 @@
 //start session
 session_start();
 
-require('../Controllers/product_controller.php');
-if (isset($_POST['search']) && (!empty($_POST['product_title']))){
+// require('Controllers/product_controller.php');
+// if (isset($_POST['search']) && (!empty($_POST['product_title']))){
 
-    $product_list = viewProducts_c($_POST['product_title']);
-}else{
-    $product_list = viewProducts_c();
-}
+//     $product_list = viewProducts_c($_POST['product_title']);
+// }else{
+//     $product_list = viewProducts_c();
+// }
 
 ?>
 

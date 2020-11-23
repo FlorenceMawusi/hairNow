@@ -30,24 +30,24 @@ if(!empty($_SESSION['user_name'])){
         if(!$existing_prod){
 
             //processing the product image
-            $target_dir = "../Images/Product/";
+            $target_dir = "../img/products/";
             $target_file = $target_dir . basename($_FILES["product_image"]["name"]);
             move_uploaded_file($_FILES["product_image"]["tmp_name"], $target_file);
             
             //call the add_product function
-            $x = addProduct_c($product_cat, $product_brand, $product_title, 
-            $product_price, $product_desc, $target_file, $product_keywords);
+            $x = addProduct_c($product_title, $product_cat, $product_brand, 
+            $product_desc, $product_price, $target_file, $product_keywords);
 
             //return true or false depending on success
             if($x){
                 //redirect back to process brand page
                 $_SESSION['product_success'] = 'Product added succesfully!';
-                header('Location: ../index.php');
+                header('Location: ../Admin/add_product.php');
             }
             else{
                 //redirect back to index page
                 $_SESSION['product_err'] = 'Insertion failed.';
-                header('Location: ../View/add_product.php');
+                header('Location: ../Admin/add_product.php');
                 
 
             }
@@ -55,7 +55,7 @@ if(!empty($_SESSION['user_name'])){
         }
         else{
             $_SESSION['product_err'] = 'Product already exists.';
-            header('Location: ../View/add_product.php');
+            header('Location: ../Admin/add_product.php');
         }
 
     }

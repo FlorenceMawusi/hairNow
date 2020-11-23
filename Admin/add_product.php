@@ -130,12 +130,12 @@ $category_list = viewCategories_c();
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='../Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='login/login.php'>Login</a>
-                <a class='dropdown-item' href='login/register.php'>Register</a>
+                "<a class='dropdown-item' href='../Login/login.php'>Login</a>
+                <a class='dropdown-item' href='../Login/register.php'>Register</a>
                 ";
               } 
 
@@ -250,14 +250,14 @@ $category_list = viewCategories_c();
                 <?php
 
                 foreach($product_list as $value) {
-                    $product_title = $value['product_title'];
-                    $product_id = $value['product_id'];
+                    $product_title = $value['productname'];
+                    $product_id = $value['productID'];
                     $product_cat = $value['product_cat'];
-                    $product_desc = $value['product_desc'];
+                    $product_desc = $value['productdescription'];
                     $product_brand = $value['product_brand'];
-                    $product_price = $value['product_price'];
+                    $product_price = $value['productprice'];
                     $product_keywords = $value['product_keywords'];
-                    $product_image = $value['product_image'];
+                    $product_image = $value['productimage'];
                     echo "              
                     <li class='list-group-item'> $product_title
                     <button type='button' style = 'margin-left: 1em' class='btn btn-danger float-right'>Delete</button>

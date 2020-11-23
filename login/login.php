@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,6 +110,7 @@
           <form class="text-center" action="loginproc.php" method="POST">
 
             <p class="h4 mb-4">Sign in</p>
+            <!-- login error -->
 		        <span class="text-danger"><?php if(!empty($_SESSION['login_err'])){echo $_SESSION['login_err'];}?></span>
 
             <!-- Email -->
@@ -219,5 +224,12 @@
 
   </script>
 </body>
+<?php
+// remove all session variables
+session_unset();
+
+// destroy the session
+session_destroy();
+?>
 
 </html>

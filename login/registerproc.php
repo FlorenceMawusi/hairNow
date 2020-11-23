@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
 	&& empty(trim($country_err)) && empty(trim($city_err)) && empty(trim($address_err)) && empty(trim($contact_err))) {
 		//encrypt password
 		$hash = password_hash($rpass, PASSWORD_DEFAULT);
-
+		
 		//insert into the controller
 		$x = addCustomer_c($rname, $remail, $hash, $raddress, $rcountry, $rcity, $rcontact);
 		// if it returns true 
@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
 
 			echo"success";
 			//redirect to login page
-			header("Location: ../index.php");
+			header("Location: login.php");
 			exit();
 		}
 		else{

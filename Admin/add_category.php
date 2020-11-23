@@ -4,6 +4,7 @@ session_start();
 require('../Controllers/product_controller.php');
 
 $cat_list = viewCategories_c(); 
+
 ?>
 
 <!doctype html>
@@ -124,12 +125,12 @@ $cat_list = viewCategories_c();
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='../Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='login/login.php'>Login</a>
-                <a class='dropdown-item' href='login/register.php'>Register</a>
+                "<a class='dropdown-item' href='../Login/login.php'>Login</a>
+                <a class='dropdown-item' href='../Login/register.php'>Register</a>
                 ";
               } 
 
@@ -235,8 +236,8 @@ $cat_list = viewCategories_c();
 
 <?php
 
-unset($_SESSION['brand_err']);
-unset($_SESSION['brand_success']);
+unset($_SESSION['cat_success']);
+unset($_SESSION['cat_err']);
 
 
 ?>
