@@ -3,13 +3,13 @@
 require_once('../Classes/customer_class.php');
 
 
-function addCustomer_c($name, $email, $pass, $address, $country, $city, $contact){
+function addCustomer_c($name, $email, $pass, $country, $city, $contact){
 
 	// create an instance of the Product Class
 	$customer_instance = new Customer();
 
 	// call the method from the class
-	$x = $customer_instance->addCustomer($name, $email, $pass, $address, $country, $city, $contact);
+	$x = $customer_instance->addCustomer($name, $email, $pass, $country, $city, $contact);
 	if($x){
 		return true;
 	}

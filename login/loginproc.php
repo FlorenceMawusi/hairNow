@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
 			
 			
 			//redirection to home page
-			header('Location: ../index.php');
+			header('Location: http://localhost/E-Commerce/HairNow/View/index.php');
 			//to make sure the code below does not execute after redirection
 			exit();
 		} else 
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
 			$_SESSION['login_err'] ='incorrect username or password';
 			
 			echo "incorrect password ";
-			header('Location: login.php');
+			header('Location: http://localhost/E-Commerce/HairNow/Login/login.php');
 		}
 
 	} else{
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 		$_SESSION['login_err'] = "incorrect username or password";
 		echo "user not found";
 
-		header('Location: login.php');
+		header('Location: http://localhost/E-Commerce/HairNow/Login/login.php');
 	}
 }
 

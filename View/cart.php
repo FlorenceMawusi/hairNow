@@ -9,13 +9,19 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="css/mdb.min.css" rel="stylesheet">
+  <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="css/style.min.css" rel="stylesheet">
+  <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet">
 
+<style>
+  .cart-img{
+    height: 150px;
+    width: 150px
+  }
 
+</style>
 </head>
 
 <body>
@@ -91,14 +97,14 @@
   </nav>
   <!-- Navbar -->
 
-  <div class="container my-5 py-3 z-depth-1 rounded">
+  <div class="container my-5 py-3 mt-5 z-depth-1 rounded">
 
 
     <!--Section: Content-->
     <section class="dark-grey-text">
   
       <!-- Shopping Cart table -->
-      <div class="table-responsive">
+      <div class="table-responsive ">
   
         <table class="table product-table mb-0">
   
@@ -133,7 +139,7 @@
             <!-- First row -->
             <tr>
               <th scope="row">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" alt="" class="img-fluid z-depth-0">
+                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" alt="" class="cart-img img-fluid z-depth-0">
               </th>
               <td>
                 <h5 class="mt-3">
@@ -161,7 +167,7 @@
             <!-- Second row -->
             <tr>
               <th scope="row">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg" alt="" class="img-fluid z-depth-0">
+                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg" alt="" class=" cart-img img-fluid z-depth-0">
               </th>
               <td>
                 <h5 class="mt-3">
@@ -315,13 +321,13 @@
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/mdb.min.js"></script>
   <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization

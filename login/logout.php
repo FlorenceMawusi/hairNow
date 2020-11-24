@@ -11,5 +11,5 @@ session_unset();
 session_destroy();
 
 
-header('Location: ../index.php');
+header('Location: http://localhost/E-Commerce/HairNow/View/index.php');
 ?>

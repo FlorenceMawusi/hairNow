@@ -7,7 +7,7 @@ require('../Controllers/cart_controller.php');
 
 
 
-    if(checkProdExist_c($_GET['product_id'],$_SESSION['user_id'], $_SERVER['REMOTE_ADDR'] )){
+    if(checkCartExist_c($_GET['product_id'],$_SESSION['user_id'], $_SERVER['REMOTE_ADDR'] )){
         $_SESSION['cart_err'] = "Oops, product is already in your cart. Go to cart to increase quantity.";
         
         header('Location: ../View/all_product.php');
@@ -30,11 +30,11 @@ require('../Controllers/cart_controller.php');
 
     if(!$x){
         $_SESSION['cart_err'] = "Add to cart failed";
-        header('Location: ../View/all_product.php');
+        header('Location: http://localhost/E-Commerce/HairNow/View/index.php');
         
     }else{
         $_SESSION['cart_success'] = "Product added succesfully";
-        header('Location: ../View/all_product.php');
+        header('Location: http://localhost/E-Commerce/HairNow/View/index.php');
         
     }
 

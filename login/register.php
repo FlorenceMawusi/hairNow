@@ -128,11 +128,6 @@ session_start();
               It is advisable to use a strong password
             </small>
 
-            <!-- Address -->
-            <input type="text" name="caddress" id="defaultRegisterFormAddress" class="form-control mb-4" placeholder="Adress">
-            <span class="text-danger"><?php if(!empty($_SESSION['address_err'])){echo $_SESSION['address_err'];}?></span>
-
-
             <!-- City -->
             <input type="text" name="ccity" id="defaultRegisterFormCity" class="form-control mb-4" placeholder="City">
             <span class="text-danger"><?php if(!empty($_SESSION['city_err'])){echo $_SESSION['city_err'];}?></span>

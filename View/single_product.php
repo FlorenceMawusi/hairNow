@@ -1,3 +1,20 @@
+<?php
+//start session
+session_start();
+
+require_once('../Controllers/product_controller.php');
+require_once('../Controllers/cart_controller.php');
+$id  = $_GET['product_id'];
+$product_list = viewAProduct_c($id);
+
+$product_cat_id = $product_list['product_cat'];
+$product_cat = viewACategory_c($product_cat_id);
+
+
+$product_brand_id = $product_list['product_brand'];
+$product_brand = viewABrand_c($product_brand_id);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +26,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="css/mdb.min.css" rel="stylesheet">
+  <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="css/style.min.css" rel="stylesheet">
+  <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -97,9 +114,12 @@
       <div class="row wow fadeIn">
 
         <!--Grid column-->
-        <div class="col-md-6 mb-4">
+        <div class="col-md-4 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
+          <img 
+            src=<?php echo '"http://localhost/E-Commerce/HairNow/img/products/'.$product_list['productimage'].'"' ;?> 
+            alt=<?php echo '"'.$product_list['productimage'].'"' ;?>
+          >
 
         </div>
         <!--Grid column-->
@@ -112,32 +132,33 @@
 
             <div class="mb-3">
               <a href="">
-                <span class="badge purple mr-1">Category 2</span>
+                <span class="badge purple mr-1"><?php echo $product_brand['brand_name'] ;?></span>
               </a>
               <a href="">
-                <span class="badge blue mr-1">New</span>
+                <span class="badge blue mr-1"><?php echo $product_cat['cat_name'] ;?></span>
               </a>
               <a href="">
-                <span class="badge red mr-1">Bestseller</span>
+                <span class="badge green mr-1"><?php echo $product_list['product_keywords'] ;?></span>
               </a>
             </div>
 
+            <p class="lead font-weight-bold"><?php echo $product_list['productname'] ;?></p>
+
             <p class="lead">
               <span class="mr-1">
-                <del>$200</del>
+                <del>GHC <?php echo $product_list['productprice'] * (5/3) ;?></del>
               </span>
-              <span>$100</span>
+              <span>GHC <?php echo $product_list['productprice'] ;?></span>
             </p>
 
             <p class="lead font-weight-bold">Description</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
-              sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
+            <p><?php echo $product_list['productdescription'] ;?></p>
 
-            <form class="d-flex justify-content-left">
+            <form class="d-flex justify-content-left" method="GET" action="http://localhost/E-Commerce/HairNow/Actions/add_to_cart.php">
               <!-- Default input -->
-              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <input type="number" value="1" name="qty" aria-label="Search" class="form-control" style="width: 100px">
+              <input type="hidden" value="<?php echo $product_list['productID'] ;?>" name="product_id" >
               <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                 <i class="fas fa-shopping-cart ml-1"></i>
               </button>
@@ -155,54 +176,7 @@
 
       <hr>
 
-      <!--Grid row-->
-      <div class="row d-flex justify-content-center wow fadeIn">
-
-        <!--Grid column-->
-        <div class="col-md-6 text-center">
-
-          <h4 class="my-4 h4">Additional information</h4>
-
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
-            voluptates,
-            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
-
-        </div>
-        <!--Grid column-->
-
-      </div>
-      <!--Grid row-->
-
-      <!--Grid row-->
-      <div class="row wow fadeIn">
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-12 mb-4">
-
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
-
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
-
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-      </div>
-      <!--Grid row-->
-
+      
     </div>
   </main>
   <!--Main layout-->
@@ -273,13 +247,13 @@
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/mdb.min.js"></script>
   <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization

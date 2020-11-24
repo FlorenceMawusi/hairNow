@@ -1,6 +1,6 @@
 <?php
 
-require_once('../Controllers/cart_controller.php');
+require_once('../Classes/cart_class.php');
 
 
 function addCart_c($p_id, $ip_add,$c_id,$qty){
@@ -51,12 +51,12 @@ function deleteCart_c($c_id, $ip_add, $p_id){
 	
 }
 
-function checkProdExist_c($p_id, $u_id, $ip_add){
+function checkCartExist_c($p_id, $u_id, $ip_add){
     // create an instance of the Cart Class
 	$cart_instance = new Cart();
 
 	// call the method from the class
-	$x = $cart_instance->checkProdExist($p_id, $u_id, $ip_add);
+	$x = $cart_instance->checkCartExist($p_id, $u_id, $ip_add);
 
 	if($x != NULL){
 		return true;
@@ -84,4 +84,62 @@ function viewCart_c($user_id){
 
 	// return the array containing the records
 	return $arr;
+}
+
+function addOrder_c($user_id, $invoice_no, $order_date, $order_status){
+
+	// create an instance of the cart Class
+	$order_instance = new Cart();
+
+	// call the method from the class
+	$x = $order_instance->addOrder($user_id, $invoice_no, $order_date, $order_status);
+
+	if($x){
+		return true;
+	}
+
+	return false;
+
+}
+
+function findOrder_c($invoice_no){
+	// create an instance of the cart Class
+	$cart_instance = new Cart();
+
+	// call the method from the class
+	$x = $cart_instance->findOrder($invoice_no);
+
+	return $x;
+}
+
+function addPayment_c($amt, $user_id, $order_id,$currency, $order_date){
+	
+	// create an instance of the cart Class
+	$cart_instance = new Cart();
+
+	// call the method from the class
+	$x = $cart_instance->addPayment($amt, $user_id, $order_id,$currency, $order_date);
+
+	if($x){
+		return true;
+	}
+
+	return false;
+
+
+}
+
+
+function deleteUserCart_c($id){
+		// create an instance of the Brand Class
+		$cart_instance = new Cart();
+
+		// call the method from the class
+		$x = $cart_instance->deleteUserCart($id);
+	
+		if($x){
+			return true;
+		}
+	
+		return false;
 }
