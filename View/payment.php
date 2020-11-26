@@ -1,19 +1,29 @@
 <?php
 //start session
 session_start();
-require('../Controllers/product_controller.php');
 
-$cat_list = viewCategories_c(); 
+require_once('../Controllers/cart_controller.php');
+
+
+  $ip_add = $_SERVER['REMOTE_ADDR'];
+  if(isset($_SESSION['user_id'])){$c_id = $_SESSION['user_id'];} else{$c_id=null;}
+  $cart_list = viewCart_c($c_id, $ip_add);
+  
+  
+  
+  $_SESSION['cart_len'] = count($cart_list);
+
 
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Category</title>
+  <title>Material Design Bootstrap</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -22,17 +32,16 @@ $cat_list = viewCategories_c();
   <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet">
-
-  <style>
-    img {
-        width: 200px;
-        height: 200px;
-    }
-</style>
 </head>
-  <body>
-    <!-- Navbar -->
-    <nav
+
+<style>
+  
+</style>
+
+<body class="grey lighten-3">
+
+  <!-- Navbar -->
+  <nav
       class="navbar fixed-top navbar-expand-lg  navbar-dark default-color lighten-3 scrolling-navbar"
     >
       <div class="container">
@@ -145,89 +154,82 @@ $cat_list = viewCategories_c();
       </div>
     </nav>
     <!-- Navbar -->
-    <br><br><br>
 
-<!-- Button trigger modal for add button -->
-<button type="button" style = "margin: 1em" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
-  Add Category
-</button>
+  <!--Main layout-->
+  <main class="mt-5 pt-4">
+    <div class="container wow fadeIn">
 
-<!-- Add Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content"> 
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class = "login-form" >
-            <form id ="form" action = "http://localhost/E-Commerce/HairNow/Actions/add_category.php" method="get" >
-                <div class="form-group">
-                    <label for="brand_name">Category Name</label>
-                    <input type="text" required class="form-control" id="cat_name" name = "cat_name" placeholder="Enter the category name."> 
-                </div>
-                
-                <input type="submit" name = "submit" value = "Save Changes" class="btn btn-primary float-right"/>
-                <button type="button" class="btn btn-secondary float-right" data-dismiss="modal" style = "margin-right: 1em">Close</button>
-                <br>
-            </form>
-        </div>
-        </div>
-      <div class="modal-footer">
-        
-      </div>
-    </div>
-  </div>
-</div>
+      <!-- Heading -->
+      <h2 class="my-5 h2 text-center">Checkout</h2>
 
-    
-    
-    <br><br>
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center">
 
-	
-        <div class=" mx-auto" style="width: 35rem;">
-        <?php 
-            if(!empty($_SESSION['cat_err'])){
-                $err= $_SESSION['cat_err'];
-                echo "<span class='text-danger'>$err</span>";
-                
-            }
-            elseif(!empty($_SESSION['cat_success'])){
-                $success= $_SESSION['cat_success'];
-                echo "<span class='text-success'>$success</span>";
-            }
-        ?>
-            <h2 class="text-center">Categories in your store</h2>
-            <div class="card shadow rounded mx-auto" style="width: 35rem;">
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!-- Heading -->
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill"><?php echo $_SESSION['cart_len']; ?></span>
+          </h4>
+
+          <!-- Cart -->
+          <ul class="list-group mb-3 z-depth-1">
+          <?php
+            $total_cost = 0;
+            $email = $_SESSION['email'];
             
-                <ul class="list-group list-group-flush">
-                <?php
-                foreach($cat_list as $value) {
-                    $cat_name = $value['cat_name'];
-                    $cat_id = $value['cat_id'];
-                    echo "              
-                    <li class='list-group-item'> $cat_name
-                    <button type='button' style = 'margin-left: 1em' class='btn btn-danger float-right'>Delete</button>
-                    <form action = 'http://localhost/E-Commerce/HairNow/Admin/edit_category.php' method = 'post' style = 'display: inline-block;
-                    float: right';>
-                    <input type=hidden name = 'cat_id' value = '$cat_id'></input>
-                    <input type=hidden name = 'cat_name' value = '$cat_name'></input>
-                    <button id='edit_button' name ='edit_button' type='submit' value='Edit' class='btn btn-success float-right'>Edit</button>
-                    </form>
-                    </li>";
-                }
+            foreach($cart_list as $value) {
+                $p_id = $value['product_id'];
+                $c_id = $value['customer_id'];
+                $product_title = $value['productname'];
+                $product_price = $value['productprice'];
+                $qty = $value['quantity'];
+                $subtotal = $qty * $product_price;
+                $total_cost = $total_cost += $subtotal;
 
-                ?>
 
-                </ul>
+             echo "
+             <li class='list-group-item d-flex justify-content-between lh-condensed'>
+             <div>
+               <h6 class='my-0'>$product_title</h6>
+             </div>
+             <span class='text-muted'>GHC $product_price</span>
+           </li>
+            ";
+          }
+          ?>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total </span>
+              <strong>GHC <?php echo $total_cost?></strong>
+            </li>
+          </ul>
+          <!-- Cart -->
+
+          <!-- Pay -->
+
+          <form id="paymentForm">
+            <div class="card ">
+              <input type="hidden" value='<?php echo $email; ?>' id="email-address">
+              <input type="hidden" value="<?php echo $total_cost; ?>" id="amount">
+              <button class="btn btn-secondary btn-md waves-effect m-0" onclick="payWithPaystack()" type="submit">Pay</button>
             </div>
-        </div>
+          </form>
+          <!-- Pay -->
 
-        <!--Footer-->
-        <footer class="page-footer text-center font-small mt-4 teal wow fadeIn">
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+      <!--Footer-->
+      <footer class="page-footer text-center font-small mt-4 teal wow fadeIn">
     
     <div class="container my-5 py-5 z-depth-1 ">
     
@@ -393,23 +395,23 @@ $cat_list = viewCategories_c();
         </footer>
         <!--/.Footer-->
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-
-<?php
-
-unset($_SESSION['cat_success']);
-unset($_SESSION['cat_err']);
-
-
-?>
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+  <script src="http://localhost/E-Commerce/HairNow/js/cartPayment.js"></script>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
 
 </body>
-</html>
 
+</html>

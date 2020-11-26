@@ -27,19 +27,19 @@ if(!empty($_SESSION['user_name']) && $_SESSION['user_role'] == 1){
         if($x){
             //redirect back to index page
             $_SESSION['cat_success'] = 'Category edited succesfully!';
-            header('Location: ../Admin/add_category.php');
+            header('Location: http://localhost/E-Commerce/HairNow/Admin/add_category.php');
         }
         else{
             //redirect back to index page
             $_SESSION['cat_err'] = 'Update Unsucessful.';
-            header('Location: ../Admin/add_category.php');
+            header('Location: http://localhost/E-Commerce/HairNow/Admin/add_category.php');
             
 
         }
 
     }else{
         $_SESSION['cat_err'] = 'Update Unsuccessful.';
-        header('Location: ../Admin/add_category.php');
+        header('Location: http://localhost/E-Commerce/HairNow/Admin/add_category.php');
         
     
     }

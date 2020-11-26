@@ -10,7 +10,7 @@ require('../Controllers/cart_controller.php');
     if(checkCartExist_c($_GET['product_id'],$_SESSION['user_id'], $_SERVER['REMOTE_ADDR'] )){
         $_SESSION['cart_err'] = "Oops, product is already in your cart. Go to cart to increase quantity.";
         
-        header('Location: ../View/all_product.php');
+        header('Location: http://localhost/E-Commerce/HairNow/View/');
 
         return;
     }

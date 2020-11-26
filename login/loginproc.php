@@ -5,7 +5,8 @@
 session_start(); 
 
 //connnect to the controller
-require("../Controllers/customer_controller.php");
+require_once("../Controllers/customer_controller.php");
+require_once("../Controllers/cart_controller.php");
 
 
 
@@ -31,8 +32,11 @@ if (isset($_POST['submit'])) {
 			$_SESSION["user_id"] = $getDetails['customerID'];
 			$_SESSION["user_role"] = $getDetails['user_role'];
 			$_SESSION["user_name"] = $getDetails['customer_name'];
+			$_SESSION["email"] = $_POST['cemail'];
 			
-			
+			//update the cart table with user id where his ip address is.
+			updateCartWithUser_c($_SESSION['user_id'], $_SERVER['REMOTE_ADDR']);
+
 			//redirection to home page
 			header('Location: http://localhost/E-Commerce/HairNow/View/index.php');
 			//to make sure the code below does not execute after redirection

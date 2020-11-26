@@ -21,11 +21,11 @@ $x = deleteCart_c($c_id, $ip_add,$p_id);
 
     if(!$x){
         $_SESSION['del_cart_err'] = "Failed to delete.";
-        header('Location: ../View/cart.php');
+        header('Location: http://localhost/E-Commerce/HairNow/View/cart.php');
         
     }else{
         $_SESSION['del_cart_success'] = "Product deleted successfully.";
-        header('Location: ../View/cart.php');
+        header('Location: http://localhost/E-Commerce/HairNow/View/cart.php');
         
     }
 ?>

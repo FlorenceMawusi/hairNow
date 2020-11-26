@@ -21,11 +21,11 @@ if(isset($_POST['cartqty']) && isset($_POST['p_id'])){
     $x = updateCartQty_c($p_id, $ip_add,$c_id,$qty);
 
     if($x){
-        header('Location: ../View/cart.php');
+        header('Location: http://localhost/E-Commerce/HairNow/View/cart.php');
         
     }else{
         $_SESSION['cart_err'] = 'Sorry, update quantity failed';
-        header('Location: ../View/cart.php');
+        header('Location: http://localhost/E-Commerce/HairNow/View/cart.php');
         
     }
 

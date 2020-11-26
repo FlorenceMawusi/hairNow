@@ -27,19 +27,19 @@ if(!empty($_SESSION['user_name']) && $_SESSION['user_role'] == 1){
         if($x){
             //redirect back to index page
             $_SESSION['brand_success'] = 'Brand edited succesfully!';
-            header('Location: ../Admin/add_brand.php');
+            header('Location: http://localhost/E-Commerce/HairNow/Admin/add_brand.php');
         }
         else{
             //redirect back to index page
             $_SESSION['brand_err'] = 'Update Unsucessful.';
-            header('Location: ../Admin/add_brand.php');
+            header('Location: http://localhost/E-Commerce/HairNow/Admin/add_brand.php');
             
 
         }
 
     }else{
         $_SESSION['brand_err'] = 'Update Unsuccessful.';
-        header('Location: ../Admin/add_brand.php');
+        header('Location: http://localhost/E-Commerce/HairNow/Admin/add_brand.php');
         
     
     }

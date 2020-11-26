@@ -42,12 +42,12 @@ if(!empty($_SESSION['user_name'])){
             if($x){
                 //redirect back to process brand page
                 $_SESSION['product_success'] = 'Product added succesfully!';
-                header('Location: ../Admin/add_product.php');
+                header('Location: http://localhost/E-Commerce/HairNow/Admin/add_product.php');
             }
             else{
                 //redirect back to index page
                 $_SESSION['product_err'] = 'Insertion failed.';
-                header('Location: ../Admin/add_product.php');
+                header('Location: http://localhost/E-Commerce/HairNow/Admin/add_product.php');
                 
 
             }
@@ -55,7 +55,7 @@ if(!empty($_SESSION['user_name'])){
         }
         else{
             $_SESSION['product_err'] = 'Product already exists.';
-            header('Location: ../Admin/add_product.php');
+            header('Location: http://localhost/E-Commerce/HairNow/Admin/add_product.php');
         }
 
     }

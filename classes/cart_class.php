@@ -11,7 +11,6 @@ class Cart extends Connection{
     // addCart
 	function addCart($p_id, $ip_add,$c_id,$qty){
 		if($c_id == null){
-			echo "hello there";
 			$query = "insert into shopping_cart
 			(product_id, ip_add,quantity)
 			values('$p_id', '$ip_add','$qty')";
@@ -30,11 +29,12 @@ class Cart extends Connection{
 
 	function updateCartQty($p_id, $ip_add,$c_id,$qty){
 		if(!empty($_SESSION['user_id'])){
-			$query = "update cart
+			$query = "update shopping_cart
 			set quantity = '$qty'
-			where product_id = '$p_id' and customer_id = '$c_id' ";
+			where (product_id = '$p_id' and customer_id = '$c_id')
+			AND (product_id = '$p_id' and ip_add = '$ip_add') ";
 		} else{
-			$query = "update cart
+			$query = "update shopping_cart
 			set quantity = '$qty'
 			where product_id = '$p_id' and ip_add = '$ip_add' ";
 		}
@@ -47,10 +47,11 @@ class Cart extends Connection{
 
     function deleteCart($c_id, $ip_add, $p_id){
 		if(!empty($_SESSION['user_id'])){
-			$query = "delete from cart where customer_id = '$c_id' and p_id = '$p_id' ";
+			$query = "delete from shopping_cart where (customer_id = '$c_id' and product_id = '$p_id')
+			AND (ip_add = '$ip_add' and product_id = '$p_id') ";
 
 		} else{
-			$query = "delete from cart where ip_add = '$ip_add' and p_id = '$p_id' ";
+			$query = "delete from shopping_cart where ip_add = '$ip_add' and product_id = '$p_id' ";
 		}
 
 		// return true or false
@@ -64,7 +65,8 @@ class Cart extends Connection{
 
 		if(!empty($_SESSION['user_id'])){
 			$query = "select * from shopping_cart
-			where product_id = '$p_id' and customer_id = '$c_id'";
+			where (product_id = '$p_id' and customer_id = '$c_id')
+			AND (product_id = '$p_id' and ip_add = '$ip_add')";
 		} else {
 			$query = "select * from shopping_cart
 			where product_id = '$p_id' and ip_add = '$ip_add'";
@@ -81,18 +83,19 @@ class Cart extends Connection{
     }
     
     //view all products in cart according to customer
-	function viewCart($u_id){
+	function viewCart($u_id, $ip_add){
 
 		if(!empty($_SESSION['user_id'])){
-			$query = "select products.product_title, products.product_price,
-			products.product_desc, products.product_image, 
-			cart.p_id, cart.c_id, cart.ip_add, cart.qty from cart, products 
-			where cart.c_id = '$u_id' and products.product_id = cart.p_id";
+			$query = "select hairproducts.productname, hairproducts.productprice,
+			hairproducts.productdescription, hairproducts.productimage, 
+			shopping_cart.product_id, shopping_cart.customer_id, shopping_cart.ip_add, shopping_cart.quantity from shopping_cart, hairproducts 
+			where shopping_cart.customer_id = '$u_id' AND hairproducts.productID = shopping_cart.product_id
+			";
 		} else {
-			$query = "select products.product_title, products.product_price,
-			products.product_desc, products.product_image, 
-			cart.p_id, cart.c_id, cart.ip_add, cart.qty from cart, products 
-			where cart.ip_add = '$u_id' and products.product_id = cart.p_id";
+			$query = "select hairproducts.productname, hairproducts.productprice,
+			hairproducts.productdescription, hairproducts.productimage, 
+			shopping_cart.product_id, shopping_cart.customer_id, shopping_cart.ip_add, shopping_cart.quantity from shopping_cart, hairproducts 
+			where shopping_cart.ip_add = '$ip_add' and hairproducts.productID = shopping_cart.product_id";
 		}
 		
 
@@ -104,9 +107,21 @@ class Cart extends Connection{
 
 	}
 
+	function updateCartWithUser($u_id, $ip_add){
+		
+		$query = "update shopping_cart
+		set customer_id = '$u_id'
+		where ip_add = '$ip_add' ";
+        
+
+		// return true or false
+		return $this->query($query);
+
+	}
+
 	function addOrder($user_id, $invoice_no, $order_date, $order_status){
-		$query = "insert into orders
-        (customer_id, invoice_no, order_date, order_status)
+		$query = "insert into productorders
+        (customer_ID, invoice_no, order_date, order_status)
         values('$user_id', '$invoice_no', '$order_date', '$order_status')";
 
 		// return true or false
@@ -114,7 +129,7 @@ class Cart extends Connection{
 	}
 
 	function findOrder($invoice_no){
-		$query = "select order_id from orders
+		$query = "select orderID from productorders
 		where invoice_no = '$invoice_no'";
 		
 		// return true or false
@@ -124,18 +139,18 @@ class Cart extends Connection{
 		return $this->fetch();
 	}
 
-	function addPayment($amt, $user_id, $order_id, $currency,$order_date){
-		$query = "insert into payment
-        (amt, customer_id, order_id, currency, payment_date)
-        values('$amt', '$user_id', '$order_id', '$currency','$order_date')";
+	function addPayment($invoice_no,$amt, $user_id, $order_id, $currency,$order_date){
+		$query = "insert into orderpayments
+        (invoice_number,amount, customerID, orderid, currency, payment_date)
+        values('$invoice_no','$amt', '$user_id', '$order_id', '$currency','$order_date')";
 
 		// return true or false
 		return $this->query($query);
 	}
 
 	function deleteUserCart($user_id){
-		$query = "delete from cart 
-		where c_id = '$user_id'";
+		$query = "delete from shopping_cart 
+		where customer_id = '$user_id'";
 
 		// return true or false
 		return $this->query($query);

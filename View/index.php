@@ -10,6 +10,18 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
     $product_list = viewProducts_c();
 }
 
+require('../Controllers/cart_controller.php');
+
+
+  $ip_add = $_SERVER['REMOTE_ADDR'];
+  if(isset($_SESSION['user_id'])){$c_id = $_SESSION['user_id'];} else{$c_id=null;}
+  $cart_list = viewCart_c($c_id, $ip_add);
+
+
+
+  $_SESSION['cart_len'] = count($cart_list) or 0;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -28,17 +40,17 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Material Design Bootstrap -->
-    <link href="../css/mdb.min.css" rel="stylesheet" />
+    <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
-    <link href="../css/style.min.css" rel="stylesheet" />
+    <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet" />
     <style type="text/css">
       html,
       body,
       header,
       .carousel {
-        height: 80vh;
+        height: 70vh;
       }
 
       @media (max-width: 740px) {
@@ -81,7 +93,7 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
     >
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="#" target="_blank">
+        <a class="navbar-brand waves-effect" href="http://localhost/E-Commerce/HairNow/View" target="_blank">
           <strong class="blue-text">HairNow</strong>
         </a>
 
@@ -103,7 +115,7 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link waves-effect" href="#"
+              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View"
                 >Home
                 <span class="sr-only">(current)</span>
               </a>
@@ -145,7 +157,10 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
               <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View/cart.php">
-                <span class="badge red z-depth-1 mr-1"> 1 </span>
+                <span class="badge red z-depth-1 mr-1">
+                  <?php if(isset($_SESSION['cart_len'])){
+                    echo $_SESSION['cart_len'];} else {echo"";} ?> 
+                </span>
                 <i class="fas fa-shopping-cart"></i>
                 <span class="clearfix d-none d-sm-inline-block"> Cart </span>
               </a>
@@ -186,6 +201,8 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
       </div>
     </nav>
     <!-- Navbar -->
+    <br><br>
+    
 
     <!--Carousel Wrapper-->
     <div
@@ -345,7 +362,20 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
       <!--/.Controls-->
     </div>
     <!--/.Carousel Wrapper-->
-
+    
+    <div class="col-md-12 mb-4 text-center">
+      <?php 
+          if(!empty($_SESSION['cart_err'])){
+              $err= $_SESSION['cart_err'];
+              echo "<h5><span class=' badge badge-danger badge-lg'>$err</span></h5>";
+              
+          }
+          elseif(!empty($_SESSION['cart_success'])){
+              $success= $_SESSION['cart_success'];
+              echo "<h5><span class=' badge badge-success badge-lg'>$success</span></h5>";
+          }
+      ?> 
+    </div>
     <!--Main layout-->
     <main>
       <div class="container">
@@ -416,23 +446,11 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
 
         <!--Section: Products v.3-->
         <section class="text-center mb-4">
-        <div class="col-md-12 mb-4">
-            <?php 
-                if(!empty($_SESSION['cart_err'])){
-                    $err= $_SESSION['cart_err'];
-                    echo "<span class='text-danger'>$err</span>";
-                    
-                }
-                elseif(!empty($_SESSION['cart_success'])){
-                    $success= $_SESSION['cart_success'];
-                    echo "<span class='text-success'>$success</span>";
-                }
-            ?> 
-          </div>
+
           <!--Grid row-->
           <div class="row wow fadeIn">
             <!--Grid column-->
-                      <?php
+          <?php
 
           foreach($product_list as $value) {
               $productname = $value['productname'];
@@ -490,7 +508,7 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
               <!--Buttons-->
             </div>
             <!--Grid column-->
-                          ";
+            ";
           }
 
           ?>
@@ -543,67 +561,156 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
     <!--Main layout-->
 
     <!--Footer-->
-    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-      <!--Call to action-->
-      <div class="pt-4">
-        <a
-          class="btn btn-outline-white"
-          href="https://mdbootstrap.com/docs/jquery/getting-started/download/"
-          target="_blank"
-          role="button"
-          >Download MDB
-          <i class="fas fa-download ml-2"></i>
-        </a>
-        <a
-          class="btn btn-outline-white"
-          href="https://mdbootstrap.com/education/bootstrap/"
-          target="_blank"
-          role="button"
-          >Start free tutorial
-          <i class="fas fa-graduation-cap ml-2"></i>
-        </a>
+    <footer class="page-footer text-center font-small mt-4 teal wow fadeIn">
+    
+<div class="container my-5 py-5 z-depth-1 ">
+
+<!--Section: Content-->
+<section class="text-center px-md-5 mx-md-5 mt-4 ">
+
+  <!-- Section heading -->
+  <h3 class="font-weight-bold mb-4">Contact Us</h3>
+  <!-- Section description -->
+  <p class="text-center w-responsive mx-auto mb-5">We are a phone call or email away!</p>
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-9 mb-md-0 mb-5">
+
+      <form>
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-md-6">
+            <div class="md-form mb-0">
+              <input type="text" id="contact-name" class="form-control">
+              <label for="contact-name" class="">Your name</label>
+            </div>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-6">
+            <div class="md-form mb-0">
+              <input type="text" id="contact-email" class="form-control">
+              <label for="contact-email" class="">Your email</label>
+            </div>
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-md-12">
+            <div class="md-form mb-0">
+              <input type="text" id="contact-Subject" class="form-control">
+              <label for="contact-Subject" class="">Subject</label>
+            </div>
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-md-12">
+            <div class="md-form">
+              <textarea id="contact-message" class="form-control md-textarea" rows="3"></textarea>
+              <label for="contact-message">Your message</label>
+            </div>
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </form>
+
+      <div class="text-center text-md-left">
+        <a class="btn btn-primary btn-md btn-rounded">Send</a>
       </div>
-      <!--/.Call to action-->
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-3 text-center">
+      <ul class="list-unstyled mb-0">
+        <li>
+          <i class="fas fa-map-marker-alt fa-2x blue-text"></i>
+          <p>Brekusu, Ghana</p>
+        </li>
+        <li>
+          <i class="fas fa-phone fa-2x mt-4 blue-text"></i>
+          <p>+233 56 763 2314</p>
+        </li>
+        <li>
+          <i class="fas fa-envelope fa-2x mt-4 blue-text"></i>
+          <p class="mb-0">info@hairnow.com</p>
+        </li>
+      </ul>
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+<!--Section: Content-->
+
+
+</div>
 
       <hr class="my-4" />
 
       <!-- Social icons -->
       <div class="pb-4">
-        <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+        <a href="" target="_blank">
           <i class="fab fa-facebook-f mr-3"></i>
         </a>
 
-        <a href="https://twitter.com/MDBootstrap" target="_blank">
+        <a href="" target="_blank">
           <i class="fab fa-twitter mr-3"></i>
         </a>
 
-        <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+        <a href="" target="_blank">
           <i class="fab fa-youtube mr-3"></i>
         </a>
 
         <a
-          href="https://plus.google.com/u/0/b/107863090883699620484"
+          href=""
           target="_blank"
         >
           <i class="fab fa-google-plus-g mr-3"></i>
         </a>
 
-        <a href="https://dribbble.com/mdbootstrap" target="_blank">
+        <a href="" target="_blank">
           <i class="fab fa-dribbble mr-3"></i>
         </a>
 
-        <a href="https://pinterest.com/mdbootstrap" target="_blank">
+        <a href="" target="_blank">
           <i class="fab fa-pinterest mr-3"></i>
         </a>
 
         <a
-          href="https://github.com/mdbootstrap/bootstrap-material-design"
+          href=""
           target="_blank"
         >
           <i class="fab fa-github mr-3"></i>
         </a>
 
-        <a href="http://codepen.io/mdbootstrap/" target="_blank">
+        <a href="#" target="_blank">
           <i class="fab fa-codepen mr-3"></i>
         </a>
       </div>
@@ -611,9 +718,9 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
 
       <!--Copyright-->
       <div class="footer-copyright py-3">
-        © 2019 Copyright:
-        <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank">
-          MDBootstrap.com
+        © 2020 Copyright:
+        <a target="_blank">
+          HairNow
         </a>
       </div>
       <!--/.Copyright-->
@@ -622,13 +729,13 @@ if (isset($_POST['search']) && (!empty($_POST['product_title']))){
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/jquery-3.4.1.min.js"></script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../js/mdb.min.js"></script>
+    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/mdb.min.js"></script>
     <!-- Initializations -->
     <script type="text/javascript">
       // Animations initialization

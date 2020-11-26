@@ -1,29 +1,101 @@
 <?php
+//start session
 session_start();
+
+require_once('../Controllers/cart_controller.php');
+
+
+$ip_add = $_SERVER['REMOTE_ADDR'];
+if(isset($_SESSION['user_id'])){$c_id = $_SESSION['user_id'];} else{$c_id=null;}
+$cart_list = viewCart_c($c_id, $ip_add);
+
+
+
+$_SESSION['cart_len'] = count($cart_list);
+
+
+$order_id = $_GET['invoice_no'];
+
+
+
+if(isset($_GET['clear_cart'])){
+   //delete user's products in cart
+   $delete_cart = deleteUserCart_c($_SESSION['user_id']); 
+
+   header('Location: http://localhost/E-Commerce/HairNow/View/');
+}
+
+
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>HairNow</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <!-- Bootstrap core CSS -->
+    <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Material Design Bootstrap -->
+    <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet" />
+    <!-- Your custom styles (optional) -->
+    <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet" />
+    <style type="text/css">
+      html,
+      body,
+      header,
+      .carousel {
+        height: 70vh;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet">
-  <!-- Your custom styles (optional) -->
-  <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet">
-</head>
+      @media (max-width: 740px) {
+        html,
+        body,
+        header,
+        .carousel {
+          height: 100vh;
+        }
+      }
 
-<body>
+      @media (min-width: 800px) and (max-width: 850px) {
+        html,
+        body,
+        header,
+        .carousel {
+          height: 100vh;
+        }
+      }
 
- <!-- Navbar -->
- <nav
+      .card-img-top{
+          height: 165px;
+          width: 165px;
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      .product_card{
+        height: 350px;
+          
+      }
+   
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav
       class="navbar fixed-top navbar-expand-lg  navbar-dark default-color lighten-3 scrolling-navbar"
     >
       <div class="container">
@@ -59,6 +131,7 @@ session_start();
 
             <!-- Dropdown -->
             <?php
+            
             if(!empty($_SESSION['user_role']) && $_SESSION['user_role'] == 1){
             echo
             "
@@ -83,7 +156,8 @@ session_start();
               </div>
             </li>
             ";
-           }
+            }
+           
             ?>
      
           </ul>
@@ -136,44 +210,87 @@ session_start();
       </div>
     </nav>
     <!-- Navbar -->
+    <br>
 
-  <div class="container my-5 py-5 z-depth-1">
+    <div class="container mt-5">
 
 
-    <!--Section: Content-->
-    <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
- 
+<!--Section: Content-->
+<section class="dark-grey-text">
+
+    <div class="card">
+    <div class="card-body">
 
       <!--Grid row-->
-      <div class="row d-flex justify-content-center">
+      <div class="row">
+
+        
 
         <!--Grid column-->
-        <div class="col-md-6">
-
-          <!-- Default form login -->
-          <form class="text-center" action="http://localhost/E-Commerce/HairNow/Login/loginproc.php" method="POST">
-
-            <p class="h4 mb-4">Log in</p>
-            <!-- login error -->
-		        <span class="text-danger"><?php if(!empty($_SESSION['login_err'])){echo $_SESSION['login_err'];}?></span>
-
-            <!-- Email -->
-            <input type="email" name="cemail" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
- 
-            <!-- Password -->
-            <input type="password" name="cpass" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-
-            <!-- Sign in button -->
-            <button class="btn btn-info btn-block my-4" name="submit" type="submit">Log in</button>
-
-            <!-- Register -->
-            <p>Not a member?
-              <a href="register.php">Register</a>
-            </p>
+        <div class="col-lg-12 mb-4">
 
 
-          </form>
-          <!-- Default form login -->
+          <!--Card-->
+          <div class="card z-depth-0 border border-light rounded-0">
+
+            <!--Card content-->
+            <div class="card-body">
+              <h1 class="mb-4 mt-1 h5 text-center font-weight-bold">Payment Successful!</h1>
+              <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Order ID: <?php echo $order_id; ?></h4>
+                
+              <hr>
+
+          <?php
+            $total_cost = 0;
+            if(isset($_SESSION['email'])){$email = $_SESSION['email'];}
+            if(isset($cart_list)){
+            foreach($cart_list as $value) {
+                $p_id = $value['product_id'];
+                $c_id = $value['customer_id'];
+                $product_title = $value['productname'];
+                $product_price = $value['productprice'];
+                $qty = $value['quantity'];
+                $subtotal = $qty * $product_price;
+                $total_cost = $total_cost += $subtotal;
+
+
+             echo "
+                  <dl class='row'>
+                    <dd class='col-sm-8'>
+                      $product_title
+                    </dd>
+                    <dd class='col-sm-4'>
+                       $qty
+                    </dd>
+                  </dl>
+
+                  <hr>
+            ";
+          }
+        }
+          ?>
+
+                  <dl class="row">
+                    <dt class="col-sm-8">
+                      Total
+                    </dt>
+                    <dt class="col-sm-4">
+                      GHC <?php echo $total_cost; ?>
+                    </dt>
+                  </dl>
+
+                  <hr>
+              <form method="GET" action="">
+                  <input type="hidden" value='<?php if(isset($email)){echo $email;} ?>' id="email-address">
+                  <input type="hidden" value="<?php echo $total_cost; ?>" id="amount">
+                <button name="clear_cart" class="btn btn-secondary btn-lg btn-block"  type="submit">Back to Shopping</button>
+              </form>
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+
 
         </div>
         <!--Grid column-->
@@ -181,13 +298,15 @@ session_start();
       </div>
       <!--Grid row-->
 
-
-    </section>
-    <!--Section: Content-->
-
-
+    </div>
   </div>
 
+</section>
+<!--Section: Content-->
+
+
+</div>
+    
     <!--Footer-->
     <footer class="page-footer text-center font-small mt-4 teal wow fadeIn">
     
@@ -354,29 +473,22 @@ session_start();
       <!--/.Copyright-->
     </footer>
     <!--/.Footer-->
+    
 
-  <!-- SCRIPTS -->
-  <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
-  <!-- Initializations -->
-  <script type="text/javascript">
-    // Animations initialization
-    new WOW().init();
 
-  </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+  <script src="../Js/payment.js"></script>
+  <script src="https://js.paystack.co/v1/inline.js"></script> 
+
+
+
 </body>
-<?php
-// remove all session variables
-session_unset();
-
-// destroy the session
-session_destroy();
-?>
-
 </html>
+

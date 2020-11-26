@@ -74,6 +74,8 @@ class Connection{
 
 		// else return the resultset
 		return $this->results->fetch_assoc();
+
+		
 		
 	}
 

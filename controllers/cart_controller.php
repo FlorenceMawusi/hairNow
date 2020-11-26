@@ -65,23 +65,37 @@ function checkCartExist_c($p_id, $u_id, $ip_add){
 	return false;
 }
 
-function viewCart_c($user_id){
+function updateCartWithUser_c($u_id, $ip_add){
+	// create an instance of the Cart Class
+	$cart_instance = new Cart();
+
+	// call the method from the class
+	$x = $cart_instance->updateCartWithUser($u_id, $ip_add);
+
+	if($x != NULL){
+		return true;
+	}
+
+	return false;
+}
+
+function viewCart_c($user_id, $ip_add){
     // create an instance of the cart Class
 	$cart_instance = new Cart();
 
 	// call the method from the class
-	$x = $cart_instance->viewCart($user_id);
+	$x = $cart_instance->viewCart($user_id, $ip_add);
 
 	// create an empty array
 	$arr = array();
 
 	if($x){
+		$arr = array($x);
 		// store all the rows into the array
 		while($row = $cart_instance->fetch()){
 			$arr[] = $row;
 		}
 	}
-
 	// return the array containing the records
 	return $arr;
 }
@@ -112,13 +126,13 @@ function findOrder_c($invoice_no){
 	return $x;
 }
 
-function addPayment_c($amt, $user_id, $order_id,$currency, $order_date){
+function addPayment_c($invoice_no, $amt, $user_id, $order_id,$currency, $order_date){
 	
 	// create an instance of the cart Class
 	$cart_instance = new Cart();
 
 	// call the method from the class
-	$x = $cart_instance->addPayment($amt, $user_id, $order_id,$currency, $order_date);
+	$x = $cart_instance->addPayment($invoice_no, $amt, $user_id, $order_id,$currency, $order_date);
 
 	if($x){
 		return true;

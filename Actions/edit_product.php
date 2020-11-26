@@ -47,12 +47,12 @@ if(!empty($_SESSION['user_name'])){
         if($x){
             //redirect back to process brand page
             $_SESSION['product_success'] = 'Product edited succesfully!';
-            header('Location: ../index.php');
+            header('Location: http://localhost/E-Commerce/HairNow/View');
         }
         else{
             //redirect back to index page
             $_SESSION['product_err'] = 'Update failed.';
-            header('Location: ../View/add_product.php');
+            header('Location: http://localhost/E-Commerce/HairNow/View/add_product.php');
             
 
         }

@@ -30,12 +30,12 @@ if(!empty($_SESSION['user_name']) && $_SESSION['user_role'] == 1){
             if($x){
                 //redirect back to process brand page
                 $_SESSION['cat_success'] = 'Category added succesfully!';
-                header('Location: ../Admin/add_category.php');
+                header('Location: http://localhost/E-Commerce/HairNow/Admin/add_category.php');
             }
             else{
                 //redirect back to index page
                 $_SESSION['cat_err'] = 'Please enter a Category name.';
-                header('Location: ../Admin/add_category.php');
+                header('Location: http://localhost/E-Commerce/HairNow/Admin/add_category.php');
                 
 
             }
@@ -43,12 +43,12 @@ if(!empty($_SESSION['user_name']) && $_SESSION['user_role'] == 1){
         }
         else{
             $_SESSION['cat_err'] = 'Category name already exists.';
-            header('Location: ../Admin/add_category.php');
+            header('Location: http://localhost/E-Commerce/HairNow/Admin/add_category.php');
         }
 
     }else{
         $_SESSION['cat_err'] = 'Please enter a Category name.';
-        header('Location: ../Admin/add_category.php');        
+        header('Location: http://localhost/E-Commerce/HairNow/Admin/add_category.php');        
     
     }
 
