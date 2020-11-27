@@ -40,11 +40,11 @@ require('../Controllers/cart_controller.php');
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <!-- Bootstrap core CSS -->
-    <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <!-- Material Design Bootstrap -->
-    <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet" />
+    <link href="../css/mdb.min.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
-    <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet" />
+    <link href="../css/style.min.css" rel="stylesheet" />
     <style type="text/css">
       html,
       body,
@@ -93,7 +93,7 @@ require('../Controllers/cart_controller.php');
     >
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="http://localhost/E-Commerce/HairNow/View" target="_blank">
+        <a class="navbar-brand waves-effect" href="index.php" target="_blank">
           <strong class="blue-text">HairNow</strong>
         </a>
 
@@ -115,7 +115,7 @@ require('../Controllers/cart_controller.php');
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View"
+              <a class="nav-link waves-effect" href="index.php"
                 >Home
                 <span class="sr-only">(current)</span>
               </a>
@@ -140,10 +140,10 @@ require('../Controllers/cart_controller.php');
                 class='dropdown-menu dropdown-primary'
                 aria-labelledby='navbarDropdownMenuLink'
               > 
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
+                <a class='dropdown-item' href='../Admin/add_category.php'>Add Category</a>
               
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
+                <a class='dropdown-item' href='../Admin/add_brand.php'>Add brand</a>
+                <a class='dropdown-item' href='../Admin/add_product.php'>Add Product</a>
            
               </div>
             </li>
@@ -156,7 +156,7 @@ require('../Controllers/cart_controller.php');
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View/cart.php">
+              <a class="nav-link waves-effect" href="cart.php">
                 <span class="badge red z-depth-1 mr-1">
                   <?php if(isset($_SESSION['cart_len'])){
                     echo $_SESSION['cart_len'];} else {echo"";} ?> 
@@ -184,12 +184,12 @@ require('../Controllers/cart_controller.php');
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='../Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/login.php'>Login</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/register.php'>Register</a>
+                "<a class='dropdown-item' href='../Login/login.php'>Login</a>
+                <a class='dropdown-item' href='../Login/register.php'>Register</a>
                 ";
               } 
 
@@ -229,7 +229,7 @@ require('../Controllers/cart_controller.php');
           <div
             class="view"
             style="
-              background-image: url('http://localhost/E-Commerce/HairNow/img/carrousel_img_one.jpg');
+              background-image: url('../img/carrousel_img_one.jpg');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -267,7 +267,7 @@ require('../Controllers/cart_controller.php');
           <div
             class="view"
             style="
-              background-image: url('http://localhost/E-Commerce/HairNow/img/carrousel_img_two.jpg');
+              background-image: url('../img/carrousel_img_two.jpg');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -305,7 +305,7 @@ require('../Controllers/cart_controller.php');
           <div
             class="view"
             style="
-              background-image: url('http://localhost/E-Commerce/HairNow/img/carrousel_img_three.jpg');
+              background-image: url('../img/carrousel_img_three.jpg');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -467,11 +467,11 @@ require('../Controllers/cart_controller.php');
                 <!--Card image-->
                 <div class='view overlay mt-4'>
                   <img
-                    src='http://localhost/E-Commerce/HairNow/img/products/$productimage'
+                    src='../img/products/$productimage'
                     class='card-img-top'
                     alt=''
                   />
-                  <a href='http://localhost/E-Commerce/HairNow/View/single_product.php?product_id=$productID'>
+                  <a href='single_product.php?product_id=$productID'>
                     <div class='mask rgba-white-slight'></div>
                   </a>
                 </div>
@@ -499,7 +499,8 @@ require('../Controllers/cart_controller.php');
               <!--Buttons-->
                 <div class='btn-group' role='group' aria-label='Basic example'>
                   <a type='button' 
-                    href='http://localhost/E-Commerce/HairNow/Actions/add_to_cart.php?product_id=$productID&qty=1'
+                    href='../Actions/add_to_cart.php?product_id=$productID&qty=1'
+          
                     class='btn btn-default'
                   >
                     <i class='fas fa-shopping-cart'></i> Add to Cart
@@ -729,13 +730,13 @@ require('../Controllers/cart_controller.php');
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/popper.min.js"></script>
+    <script type="text/javascript" src="../js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/mdb.min.js"></script>
+    <script type="text/javascript" src="../js/mdb.min.js"></script>
     <!-- Initializations -->
     <script type="text/javascript">
       // Animations initialization

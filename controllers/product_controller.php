@@ -91,6 +91,7 @@ function viewProducts_c($search_value =''){
 	$arr = array();
 
 	if($x){
+		
 		// store all the rows into the array
 		while($row = $product_instance->fetch()){
 			$arr[] = $row;

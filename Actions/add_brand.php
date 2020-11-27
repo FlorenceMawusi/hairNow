@@ -30,12 +30,12 @@ if(!empty($_SESSION['user_name']) && $_SESSION['user_role'] == 1){
             if($x){
                 //redirect back to process brand page
                 $_SESSION['brand_success'] = 'Brand added succesfully!';
-                header('Location: http://localhost/E-Commerce/HairNow/Admin/add_brand.php');
+                header('Location: http://51.105.54.194/E-Commerce/HairNow/Admin/add_brand.php');
             }
             else{
                 //redirect back to index page
                 $_SESSION['brand_err'] = 'Please enter a brand name.';
-                header('Location: http://localhost/E-Commerce/HairNow/Admin/add_brand.php');
+                header('Location: http://51.105.54.194/E-Commerce/HairNow/Admin/add_brand.php');
                 
 
             }
@@ -43,12 +43,12 @@ if(!empty($_SESSION['user_name']) && $_SESSION['user_role'] == 1){
         }
         else{
             $_SESSION['brand_err'] = 'Brand name already exists.';
-            header('Location: http://localhost/E-Commerce/HairNow/Admin/add_brand.php');
+            header('Location: http://51.105.54.194/E-Commerce/HairNow/Admin/add_brand.php');
         }
 
     }else{
         $_SESSION['brand_err'] = 'Please enter a brand name.';
-        header('Location: http://localhost/E-Commerce/HairNow/Admin/add_brand.php');
+        header('Location: http://51.105.54.194/E-Commerce/HairNow/Admin/add_brand.php');
         
     
     }

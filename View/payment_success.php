@@ -22,7 +22,7 @@ if(isset($_GET['clear_cart'])){
    //delete user's products in cart
    $delete_cart = deleteUserCart_c($_SESSION['user_id']); 
 
-   header('Location: http://localhost/E-Commerce/HairNow/View/');
+   header('Location: index.php');
 }
 
 
@@ -47,11 +47,11 @@ if(isset($_GET['clear_cart'])){
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <!-- Bootstrap core CSS -->
-    <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <!-- Material Design Bootstrap -->
-    <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet" />
+    <link href="../css/mdb.min.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
-    <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet" />
+    <link href="../css/style.min.css" rel="stylesheet" />
     <style type="text/css">
       html,
       body,
@@ -100,7 +100,7 @@ if(isset($_GET['clear_cart'])){
     >
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="http://localhost/E-Commerce/HairNow/View" target="_blank">
+        <a class="navbar-brand waves-effect" href="index.php" target="_blank">
           <strong class="blue-text">HairNow</strong>
         </a>
 
@@ -122,7 +122,7 @@ if(isset($_GET['clear_cart'])){
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View"
+              <a class="nav-link waves-effect" href="index.php"
                 >Home
                 <span class="sr-only">(current)</span>
               </a>
@@ -148,10 +148,10 @@ if(isset($_GET['clear_cart'])){
                 class='dropdown-menu dropdown-primary'
                 aria-labelledby='navbarDropdownMenuLink'
               > 
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
+                <a class='dropdown-item' href='../Admin/add_category.php'>Add Category</a>
               
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
+                <a class='dropdown-item' href='../Admin/add_brand.php'>Add brand</a>
+                <a class='dropdown-item' href='../Admin/add_product.php'>Add Product</a>
            
               </div>
             </li>
@@ -165,7 +165,7 @@ if(isset($_GET['clear_cart'])){
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View/cart.php">
+              <a class="nav-link waves-effect" href="cart.php">
                 <span class="badge red z-depth-1 mr-1">
                   <?php if(isset($_SESSION['cart_len'])){
                     echo $_SESSION['cart_len'];} else {echo"";} ?> 
@@ -193,12 +193,12 @@ if(isset($_GET['clear_cart'])){
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='../Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/login.php'>Login</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/register.php'>Register</a>
+                "<a class='dropdown-item' href='../Login/login.php'>Login</a>
+                <a class='dropdown-item' href='../Login/register.php'>Register</a>
                 ";
               } 
 
@@ -483,9 +483,6 @@ if(isset($_GET['clear_cart'])){
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-
-  <script src="../Js/payment.js"></script>
-  <script src="https://js.paystack.co/v1/inline.js"></script> 
 
 
 

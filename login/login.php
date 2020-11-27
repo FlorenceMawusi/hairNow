@@ -13,11 +13,11 @@ session_start();
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
-  <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet">
+  <link href="../css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet">
+  <link href="../css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -28,7 +28,7 @@ session_start();
     >
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="http://localhost/E-Commerce/HairNow/View" target="_blank">
+        <a class="navbar-brand waves-effect" href="../View" target="_blank">
           <strong class="blue-text">HairNow</strong>
         </a>
 
@@ -50,7 +50,7 @@ session_start();
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View"
+              <a class="nav-link waves-effect" href="../View"
                 >Home
                 <span class="sr-only">(current)</span>
               </a>
@@ -75,10 +75,10 @@ session_start();
                 class='dropdown-menu dropdown-primary'
                 aria-labelledby='navbarDropdownMenuLink'
               > 
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
+                <a class='dropdown-item' href='../Admin/add_category.php'>Add Category</a>
               
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
+                <a class='dropdown-item' href='../Admin/add_brand.php'>Add brand</a>
+                <a class='dropdown-item' href='../Admin/add_product.php'>Add Product</a>
            
               </div>
             </li>
@@ -91,7 +91,7 @@ session_start();
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View/cart.php">
+              <a class="nav-link waves-effect" href="../View/cart.php">
                 <span class="badge red z-depth-1 mr-1">
                   <?php if(isset($_SESSION['cart_len'])){
                     echo $_SESSION['cart_len'];} else {echo"";} ?> 
@@ -119,12 +119,12 @@ session_start();
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/login.php'>Login</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/register.php'>Register</a>
+                "<a class='dropdown-item' href='login.php'>Login</a>
+                <a class='dropdown-item' href='register.php'>Register</a>
                 ";
               } 
 
@@ -151,7 +151,7 @@ session_start();
         <div class="col-md-6">
 
           <!-- Default form login -->
-          <form class="text-center" action="http://localhost/E-Commerce/HairNow/Login/loginproc.php" method="POST">
+          <form class="text-center" action="loginproc.php" method="POST">
 
             <p class="h4 mb-4">Log in</p>
             <!-- login error -->
@@ -357,13 +357,13 @@ session_start();
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="../js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript" src="../js/mdb.min.js"></script>
   <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization

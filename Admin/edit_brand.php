@@ -30,7 +30,7 @@ $brand_list = viewBrands_c();
     >
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="http://localhost/E-Commerce/HairNow/View" target="_blank">
+        <a class="navbar-brand waves-effect" href="http://51.105.54.194/E-Commerce/HairNow/View" target="_blank">
           <strong class="blue-text">HairNow</strong>
         </a>
 
@@ -77,10 +77,10 @@ $brand_list = viewBrands_c();
                 class='dropdown-menu dropdown-primary'
                 aria-labelledby='navbarDropdownMenuLink'
               > 
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
               
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
            
               </div>
             </li>
@@ -93,7 +93,7 @@ $brand_list = viewBrands_c();
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View/cart.php">
+              <a class="nav-link waves-effect" href="http://51.105.54.194/E-Commerce/HairNow/View/cart.php">
                 <span class="badge red z-depth-1 mr-1">
                   <?php if(isset($_SESSION['cart_len'])){
                     echo $_SESSION['cart_len'];} else {echo"";} ?> 
@@ -121,12 +121,12 @@ $brand_list = viewBrands_c();
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/login.php'>Login</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/register.php'>Register</a>
+                "<a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Login/login.php'>Login</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Login/register.php'>Register</a>
                 ";
               } 
 
@@ -146,7 +146,7 @@ $brand_list = viewBrands_c();
         
         <h1>Edit Brand</h1>
 		
-        <form id ="form" action = "http://localhost/E-Commerce/HairNow/Actions/edit_brand.php" method="post" >
+        <form id ="form" action = "http://51.105.54.194/E-Commerce/HairNow/Actions/edit_brand.php" method="post" >
             <div class="form-group">
                 <label for="brand_name">Brand Name</label>
 

@@ -31,14 +31,14 @@ if(isset($_GET['reference'])){
         if($addPayment){
             echo "payment added";
             // redirect to payment_success.php
-            header('Location: http://localhost/E-Commerce/HairNow/View/payment_success.php?invoice_no='.$invoice_no);
+            header('Location: ../View/payment_success.php?invoice_no='.$invoice_no);
 
 
         } else {
             echo "delete unsuccessful";
         }
 
-       // header('Location: http://localhost/E-Commerce/Lab/View/payment_failed.php');
+       // header('Location: ../View/payment_failed.php');
 
 
     } else {
@@ -49,7 +49,7 @@ if(isset($_GET['reference'])){
     echo"failed, no reference";
 
     //redirect to payment_failed.php
-    header('Location: http://localhost/E-Commerce/HairNow/View/payment_failed.php');
+    header('Location: http://51.105.54.194/E-Commerce/HairNow/View/payment_failed.php');
 
 }
 

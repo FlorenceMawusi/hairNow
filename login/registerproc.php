@@ -87,17 +87,17 @@ if (isset($_POST['submit'])) {
 
 			echo"success";
 			//redirect to login page
-			header("Location: http://localhost/E-Commerce/HairNow/Login/login.php");
+			header("Location: login.php");
 			exit();
 		}
 		else{
 			echo "insertion into db failed, must be an error";
-			header("Location: Location: http://localhost/E-Commerce/HairNow/Login/register.php");
+			header("Location: Location: register.php");
 		}
 
 	}else {
 		//redirect back to register page.
-		header("Location: Location: http://localhost/E-Commerce/HairNow/Login/register.php");
+		header("Location: Location: register.php");
 		exit();
 	}
 	

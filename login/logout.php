@@ -11,5 +11,5 @@ unset($_SESSION['user_name']);
 unset($_SESSION['email']);
 
 
-header('Location: http://localhost/E-Commerce/HairNow/View/index.php');
+header('Location: ../View/index.php');
 ?>

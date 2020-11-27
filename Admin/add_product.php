@@ -42,7 +42,7 @@ $category_list = viewCategories_c();
     >
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="http://localhost/E-Commerce/HairNow/View" target="_blank">
+        <a class="navbar-brand waves-effect" href="http://51.105.54.194/E-Commerce/HairNow/View" target="_blank">
           <strong class="blue-text">HairNow</strong>
         </a>
 
@@ -64,7 +64,7 @@ $category_list = viewCategories_c();
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View"
+              <a class="nav-link waves-effect" href="http://51.105.54.194/E-Commerce/HairNow/View"
                 >Home
                 <span class="sr-only">(current)</span>
               </a>
@@ -89,10 +89,10 @@ $category_list = viewCategories_c();
                 class='dropdown-menu dropdown-primary'
                 aria-labelledby='navbarDropdownMenuLink'
               > 
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
               
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
            
               </div>
             </li>
@@ -105,7 +105,7 @@ $category_list = viewCategories_c();
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View/cart.php">
+              <a class="nav-link waves-effect" href="http://51.105.54.194/E-Commerce/HairNow/View/cart.php">
                 <span class="badge red z-depth-1 mr-1">
                   <?php if(isset($_SESSION['cart_len'])){
                     echo $_SESSION['cart_len'];} else {echo"";} ?> 
@@ -133,12 +133,12 @@ $category_list = viewCategories_c();
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/login.php'>Login</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/register.php'>Register</a>
+                "<a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Login/login.php'>Login</a>
+                <a class='dropdown-item' href='http://51.105.54.194/E-Commerce/HairNow/Login/register.php'>Register</a>
                 ";
               } 
 
@@ -169,7 +169,7 @@ $category_list = viewCategories_c();
       </div>
       <div class="modal-body">
         <div class = "login-form" >
-            <form id ="form" action = "http://localhost/E-Commerce/HairNow/Actions/add_product.php" method="post" enctype="multipart/form-data">
+            <form id ="form" action = "http://51.105.54.194/E-Commerce/HairNow/Actions/add_product.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="product_cat">Product Category</label>
 
@@ -264,7 +264,7 @@ $category_list = viewCategories_c();
                     echo "              
                     <li class='list-group-item'> $product_title
                     <button type='button' style = 'margin-left: 1em' class='btn btn-danger float-right'>Delete</button>
-                    <form action = 'http://localhost/E-Commerce/HairNow/Admin/edit_product.php' method = 'post' style = 'display: inline-block;
+                    <form action = 'http://51.105.54.194/E-Commerce/HairNow/Admin/edit_product.php' method = 'post' style = 'display: inline-block;
                     float: right';>
                     <input type=hidden name = 'product_id' value = '$product_id'></input>
                     <input type=hidden name = 'product_title' value = '$product_title'></input>

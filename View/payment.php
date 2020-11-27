@@ -27,11 +27,11 @@ require_once('../Controllers/cart_controller.php');
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
-  <link href="http://localhost/E-Commerce/HairNow/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="http://localhost/E-Commerce/HairNow/css/mdb.min.css" rel="stylesheet">
+  <link href="../css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="http://localhost/E-Commerce/HairNow/css/style.min.css" rel="stylesheet">
+  <link href="../css/style.min.css" rel="stylesheet">
 </head>
 
 <style>
@@ -46,7 +46,7 @@ require_once('../Controllers/cart_controller.php');
     >
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="http://localhost/E-Commerce/HairNow/View" target="_blank">
+        <a class="navbar-brand waves-effect" href="index.php" target="_blank">
           <strong class="blue-text">HairNow</strong>
         </a>
 
@@ -68,7 +68,7 @@ require_once('../Controllers/cart_controller.php');
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View"
+              <a class="nav-link waves-effect" href="index.php"
                 >Home
                 <span class="sr-only">(current)</span>
               </a>
@@ -93,10 +93,10 @@ require_once('../Controllers/cart_controller.php');
                 class='dropdown-menu dropdown-primary'
                 aria-labelledby='navbarDropdownMenuLink'
               > 
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_category.php'>Add Category</a>
+                <a class='dropdown-item' href='../Admin/add_category.php'>Add Category</a>
               
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_brand.php'>Add brand</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Admin/add_product.php'>Add Product</a>
+                <a class='dropdown-item' href='../Admin/add_brand.php'>Add brand</a>
+                <a class='dropdown-item' href='../Admin/add_product.php'>Add Product</a>
            
               </div>
             </li>
@@ -109,7 +109,7 @@ require_once('../Controllers/cart_controller.php');
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="http://localhost/E-Commerce/HairNow/View/cart.php">
+              <a class="nav-link waves-effect" href="cart.php">
                 <span class="badge red z-depth-1 mr-1">
                   <?php if(isset($_SESSION['cart_len'])){
                     echo $_SESSION['cart_len'];} else {echo"";} ?> 
@@ -137,12 +137,12 @@ require_once('../Controllers/cart_controller.php');
               if(!empty($_SESSION['user_name'])){
                   echo
                   "
-                  <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/logout.php'>Logout</a>
+                  <a class='dropdown-item' href='../Login/logout.php'>Logout</a>
                   ";
               } else{
                 echo 
-                "<a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/login.php'>Login</a>
-                <a class='dropdown-item' href='http://localhost/E-Commerce/HairNow/Login/register.php'>Register</a>
+                "<a class='dropdown-item' href='../Login/login.php'>Login</a>
+                <a class='dropdown-item' href='../Login/register.php'>Register</a>
                 ";
               } 
 
@@ -397,19 +397,19 @@ require_once('../Controllers/cart_controller.php');
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/popper.min.js"></script>
+  <script type="text/javascript" src="../js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="http://localhost/E-Commerce/HairNow/js/mdb.min.js"></script>
+  <script type="text/javascript" src="../js/mdb.min.js"></script>
   <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
   </script>
-  <script src="http://localhost/E-Commerce/HairNow/js/cartPayment.js"></script>
+  <script src="../js/cartPayment.js"></script>
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
 </body>

@@ -6,6 +6,6 @@
 define('SERVER', 'localhost');
 define('USER', 'root');
 define('DATABASE', 'hairnow');
-define('PASSWORD', '');
+define('PASSWORD', 'sl!at23c');
 
 ?>
